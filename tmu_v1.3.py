@@ -28,7 +28,7 @@ FEATURES = [
 assert "risky" not in FEATURES, "'risky' must not be in FEATURES"  # safety guard
 
 # ---------- Utilities ----------
-def _free_port(preferred=5006):
+def _free_port(preferred=5008):
     """Return an available TCP port (tries preferred first)."""
     import socket as _s
     with _s.socket(_s.AF_INET, _s.SOCK_STREAM) as s:
@@ -81,13 +81,10 @@ def generate_dummy(n: int = 600) -> pd.DataFrame:
     return df.astype("float32", errors="ignore")
 
 def leakage_report(df: pd.DataFrame):
-    """Correlation of features (excludes id/target cols) with the target 'risky'."""
+    """Correlation of features (excludes id/target) with the target 'risky'."""
     feat_cols = [c for c in df.columns if c not in ("customer_no", "risky")]
-    corr = (
-        df[feat_cols]
-        .corr(numeric_only=True)
-        .corrwith(df["risky"])
-        .sort_values(key=lambda s: s.abs(), ascending=False)
+    corr = df[feat_cols].corrwith(df["risky"]).sort_values(
+        key=lambda s: s.abs(), ascending=False
     )
     red_flags = [c for c, v in corr.items() if abs(v) >= 0.90]
     txt = "No red-flags (|corr with target| ≥ 0.90)." if not red_flags \
@@ -207,15 +204,10 @@ def train_and_tune(df: pd.DataFrame):
     }
 
 def importance_tables(model: CatBoostClassifier, df: pd.DataFrame, Xte: pd.DataFrame, yte: pd.Series):
-    # Global importance from CatBoost
     cb_imp = model.get_feature_importance(Pool(Xte, yte), type="PredictionValuesChange")
-    imp = pd.DataFrame({"feature": FEATURES, "cb_importance": cb_imp}) \
-            .sort_values("cb_importance", ascending=False)
-
-    # Permutation importance (accuracy-based; light repeats)
+    imp = pd.DataFrame({"feature": FEATURES, "cb_importance": cb_imp}).sort_values("cb_importance", ascending=False)
     pim = permutation_importance(model, Xte, yte, n_repeats=3, random_state=0)
-    perm = pd.DataFrame({"feature": FEATURES, "perm_importance": pim.importances_mean}) \
-              .sort_values("perm_importance", ascending=False)
+    perm = pd.DataFrame({"feature": FEATURES, "perm_importance": pim.importances_mean}).sort_values("perm_importance", ascending=False)
     return imp, perm
 
 def narrative_from_importance(imp_df: pd.DataFrame) -> str:
@@ -242,9 +234,8 @@ def score_all(model: CatBoostClassifier, df: pd.DataFrame) -> pd.DataFrame:
     out["prob"] = np.round(proba, 4)
     out["bucket"] = [bucket(p) for p in proba]
 
-    # SHAP-based local reasons (top-3 absolute contributors)
     shap_vals = model.get_feature_importance(Pool(X), type="ShapValues")
-    shap_contrib = shap_vals[:, :-1]  # last column is expected value
+    shap_contrib = shap_vals[:, :-1]
     top_idx = np.argsort(-np.abs(shap_contrib), axis=1)[:, :3]
     out["reasons"] = [", ".join(FEATURES[j] for j in top_idx[i]) for i in range(len(out))]
 
@@ -258,7 +249,6 @@ def ping():
 @app.route("/", methods=["GET"])
 def home():
     rows, cols = (DF.shape if isinstance(DF, pd.DataFrame) else (0, 0))
-    # LEFT-ALIGNED: sample + scored tables
     sample_html = DF.head(10).to_html(classes="table table-sm table-striped table-hover align-middle",
                                       index=False, border=0, justify="left") \
                   if isinstance(DF, pd.DataFrame) else ""
@@ -311,12 +301,10 @@ def do_train():
     leak_txt, leak_corr_df = leakage_report(DF)
     MODEL, metrics = train_and_tune(DF)
 
-    # Importances (use test set from metrics)
     imp_df, perm_df = importance_tables(MODEL, DF, metrics["Xte"], metrics["yte"])
     INFO = dict(metrics)
     INFO.pop("Xtr", None); INFO.pop("ytr", None); INFO.pop("Xte", None); INFO.pop("yte", None)
 
-    # LEFT-ALIGNED: importance + leakage tables
     INFO["imp_html"] = imp_df.to_html(classes="table table-sm table-striped table-hover align-middle",
                                       index=False, border=0, justify="left")
     INFO["perm_html"] = perm_df.to_html(classes="table table-sm table-striped table-hover align-middle",
@@ -366,8 +354,7 @@ TEMPLATE = """
     .hero{background:linear-gradient(90deg,#2563eb,#7c3aed);border-radius:22px;color:#fff;padding:18px 20px}
     .hero small{opacity:.9}
     .card-soft{border:1px solid #edf1f7;box-shadow:0 8px 22px rgba(16,24,40,.06);background:#fff;border-radius:18px}
-    /* Fallback: force left alignment for all table cells/headers */
-    .table th, .table td { text-align: left !important; }
+    .table th, .table td { text-align: left !important; } /* force left-align */
   </style>
 </head>
 <body class="py-4">
@@ -378,7 +365,6 @@ TEMPLATE = """
       <h3 class="mb-1"><i class="bi bi-graph-up-arrow me-1"></i>Risk Insights Studio</h3>
       <small>End-to-end: data → train/tune → explain → score & export</small>
     </div>
-    <!-- chips removed -->
   </div>
 
   {% with messages = get_flashed_messages(with_categories=true) %}
@@ -536,7 +522,7 @@ TEMPLATE = """
 
 # ---------- Entrypoint ----------
 if __name__ == "__main__":
-    port = _free_port(5008)
+    port = _free_port(5010)
     url = f"http://127.0.0.1:{port}"
     print("\n===========================================")
     print(" Risk Insights Studio is starting")
