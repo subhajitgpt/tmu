@@ -1,5 +1,5 @@
 from __future__ import annotations
-import io, base64, socket, threading, webbrowser
+import io, socket, threading, webbrowser
 import numpy as np
 import pandas as pd
 from flask import Flask, request, redirect, url_for, render_template_string, flash, send_file
@@ -7,15 +7,8 @@ from flask import Flask, request, redirect, url_for, render_template_string, fla
 # ML
 from catboost import CatBoostClassifier, Pool
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import (
-    classification_report, confusion_matrix, roc_curve, roc_auc_score
-)
+from sklearn.metrics import confusion_matrix
 from sklearn.inspection import permutation_importance
-
-# Plotting
-import matplotlib
-matplotlib.use("Agg")  # headless safe
-import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 app.secret_key = "change-me"
@@ -32,9 +25,10 @@ FEATURES = [
     "outbound_cheque_bounce_count", "outbound_cheque_bounce_amt",
     "total_amt_credit", "total_amt_debit", "no_of_banks"
 ]
+assert "risky" not in FEATURES, "'risky' must not be in FEATURES"  # safety guard
 
 # ---------- Utilities ----------
-def _free_port(preferred=5001):
+def _free_port(preferred=5006):
     """Return an available TCP port (tries preferred first)."""
     import socket as _s
     with _s.socket(_s.AF_INET, _s.SOCK_STREAM) as s:
@@ -86,10 +80,16 @@ def generate_dummy(n: int = 600) -> pd.DataFrame:
     })
     return df.astype("float32", errors="ignore")
 
-def leakage_report(df: pd.DataFrame) -> tuple[str, pd.DataFrame]:
-    corr = df.drop(columns=["customer_no"]).corr(numeric_only=True)["risky"] \
-             .sort_values(key=lambda s: s.abs(), ascending=False)
-    red_flags = [c for c, v in corr.items() if c != "risky" and abs(v) >= 0.90]
+def leakage_report(df: pd.DataFrame):
+    """Correlation of features (excludes id/target cols) with the target 'risky'."""
+    feat_cols = [c for c in df.columns if c not in ("customer_no", "risky")]
+    corr = (
+        df[feat_cols]
+        .corr(numeric_only=True)
+        .corrwith(df["risky"])
+        .sort_values(key=lambda s: s.abs(), ascending=False)
+    )
+    red_flags = [c for c, v in corr.items() if abs(v) >= 0.90]
     txt = "No red-flags (|corr with target| ≥ 0.90)." if not red_flags \
           else "Potential leakage in: " + ", ".join(red_flags)
     return txt, corr.to_frame("corr_with_target")
@@ -126,21 +126,6 @@ def performance_at_topk(y_true: np.ndarray, proba: np.ndarray, percents: list[in
         })
     return pd.DataFrame(rows)
 
-def plot_roc_image(y_true: np.ndarray, proba: np.ndarray) -> tuple[str, float]:
-    if len(np.unique(y_true)) > 1:
-        auc = roc_auc_score(y_true, proba)
-        fpr, tpr, _ = roc_curve(y_true, proba)
-    else:
-        auc = float("nan"); fpr, tpr = np.array([0,1]), np.array([0,1])
-    fig, ax = plt.subplots(figsize=(4.8, 4.2))
-    ax.plot(fpr, tpr, label=f"AUC={auc:.3f}" if auc==auc else "AUC=N/A")
-    ax.plot([0,1],[0,1],"--")
-    ax.set_xlabel("False Positive Rate"); ax.set_ylabel("True Positive Rate")
-    ax.set_title("ROC Curve (Test)"); ax.legend(loc="lower right")
-    buf = io.BytesIO(); fig.tight_layout(); fig.savefig(buf, format="png", dpi=120); plt.close(fig)
-    b64 = base64.b64encode(buf.getvalue()).decode("ascii")
-    return f"data:image/png;base64,{b64}", auc
-
 # ---------- CatBoost training + tuning ----------
 def train_and_tune(df: pd.DataFrame):
     X = df[FEATURES].astype("float32")
@@ -162,7 +147,7 @@ def train_and_tune(df: pd.DataFrame):
     train_pool = Pool(Xtr_i, ytr_i)
     val_pool   = Pool(Xva,   yva)
 
-    # Lightweight grid (fast) — you can expand if needed
+    # Lightweight grid (fast)
     param_grid = [
         {"depth": 6, "learning_rate": 0.08, "l2_leaf_reg": 3.0},
         {"depth": 6, "learning_rate": 0.12, "l2_leaf_reg": 3.0},
@@ -183,7 +168,6 @@ def train_and_tune(df: pd.DataFrame):
     for p in param_grid:
         model = CatBoostClassifier(**base, **p)
         model.fit(train_pool, eval_set=val_pool)
-        # validation AUC
         score = model.get_best_score().get("validation", {}).get("AUC", float("-inf"))
         if score > best_auc:
             best_auc, best_model, best_params = score, model, p
@@ -193,13 +177,11 @@ def train_and_tune(df: pd.DataFrame):
     final_model.fit(Pool(pd.concat([Xtr_i, Xva]), pd.concat([ytr_i, yva])),
                     eval_set=Pool(Xte, yte))
 
-    # --- Metrics on test ---
+    # --- Metrics on test (kept for reference; not shown in UI) ---
     yhat_test = final_model.predict(Xte).astype(int)
     proba_test = final_model.predict_proba(Xte)[:, 1]
-    acc = (yhat_test == yte).mean()
-    rep = classification_report(yte, yhat_test, zero_division=0)
+    acc = float((yhat_test == yte).mean())
     cm = confusion_matrix(yte, yhat_test)
-    roc_img, auc_val = plot_roc_image(yte.values, proba_test)
 
     # Train proba for top-k (to compare)
     proba_train = final_model.predict_proba(Xtr)[:, 1]
@@ -212,16 +194,16 @@ def train_and_tune(df: pd.DataFrame):
     return final_model, {
         "best_params": best_params,
         "val_auc": float(best_auc),
-        "test_acc": float(acc),
-        "report": rep,
-        "cm": cm.tolist(),
-        "roc_auc": float(auc_val),
-        "roc_img": roc_img,
-        "topk_test_html": topk_test_df.to_html(classes="table table-sm table-striped", index=False, border=0),
-        "topk_train_html": topk_train_df.to_html(classes="table table-sm table-striped", index=False, border=0),
+        "test_acc": acc,
+        "cm": cm.tolist(),  # not rendered
+        # LEFT-ALIGNED tables via justify="left"
+        "topk_test_html": topk_test_df.to_html(classes="table table-sm table-striped table-hover align-middle",
+                                               index=False, border=0, justify="left"),
+        "topk_train_html": topk_train_df.to_html(classes="table table-sm table-striped table-hover align-middle",
+                                                 index=False, border=0, justify="left"),
         "ytr_n": int(len(ytr)), "yte_n": int(len(yte)),
         "train_base_rate": float(ytr.mean()), "test_base_rate": float(yte.mean()),
-        "Xtr": Xtr, "ytr": ytr, "Xte": Xte, "yte": yte  # for downstream importance
+        "Xtr": Xtr, "ytr": ytr, "Xte": Xte, "yte": yte
     }
 
 def importance_tables(model: CatBoostClassifier, df: pd.DataFrame, Xte: pd.DataFrame, yte: pd.Series):
@@ -276,13 +258,17 @@ def ping():
 @app.route("/", methods=["GET"])
 def home():
     rows, cols = (DF.shape if isinstance(DF, pd.DataFrame) else (0, 0))
-    sample_html = DF.head(10).to_html(classes="table table-sm table-striped", index=False, border=0) \
+    # LEFT-ALIGNED: sample + scored tables
+    sample_html = DF.head(10).to_html(classes="table table-sm table-striped table-hover align-middle",
+                                      index=False, border=0, justify="left") \
                   if isinstance(DF, pd.DataFrame) else ""
     perf = INFO if INFO else None
-    scored_html = SCORED.head(20).to_html(classes="table table-sm table-striped", index=False, border=0) \
+    scored_html = SCORED.head(20).to_html(classes="table table-sm table-striped table-hover align-middle",
+                                          index=False, border=0, justify="left") \
                   if isinstance(SCORED, pd.DataFrame) else ""
     counts = (SCORED["bucket"].value_counts().to_dict()
               if isinstance(SCORED, pd.DataFrame) else {})
+
     return render_template_string(TEMPLATE,
                                   rows=rows, cols=cols,
                                   sample_html=sample_html,
@@ -329,13 +315,18 @@ def do_train():
     imp_df, perm_df = importance_tables(MODEL, DF, metrics["Xte"], metrics["yte"])
     INFO = dict(metrics)
     INFO.pop("Xtr", None); INFO.pop("ytr", None); INFO.pop("Xte", None); INFO.pop("yte", None)
-    INFO["imp_html"] = imp_df.to_html(classes="table table-sm table-striped", index=False, border=0)
-    INFO["perm_html"] = perm_df.to_html(classes="table table-sm table-striped", index=False, border=0)
+
+    # LEFT-ALIGNED: importance + leakage tables
+    INFO["imp_html"] = imp_df.to_html(classes="table table-sm table-striped table-hover align-middle",
+                                      index=False, border=0, justify="left")
+    INFO["perm_html"] = perm_df.to_html(classes="table table-sm table-striped table-hover align-middle",
+                                        index=False, border=0, justify="left")
     INFO["narrative_html"] = narrative_from_importance(imp_df)
     INFO["leakage_text"] = leak_txt
-    INFO["leakage_table"] = leak_corr_df.to_html(classes="table table-sm table-striped", border=0)
+    INFO["leakage_table"] = leak_corr_df.to_html(classes="table table-sm table-striped table-hover align-middle",
+                                                 border=0, justify="left")
 
-    flash(f"Model trained. Best params: {metrics['best_params']}, Val AUC={metrics['val_auc']:.3f}", "success")
+    flash("Model trained.", "success")
     return redirect(url_for("home"))
 
 @app.route("/score", methods=["POST"])
@@ -368,15 +359,27 @@ TEMPLATE = """
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Risk Insights Studio — Flask (CatBoost)</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <style>
-    body{background:#f8fafc;color:#0f172a}
-    .card-soft{border:1px solid #edf1f7;box-shadow:0 6px 18px rgba(16,24,40,.06);background:#fff;border-radius:18px}
-    pre.console{background:#0b1020;color:#d1e7ff;padding:12px;border-radius:12px;white-space:pre-wrap}
+    :root{--ink:#0f172a;--soft:#e9eef6;--brand:#2563eb;--muted:#64748b}
+    body{background:linear-gradient(180deg,#f6f9ff 0%,#f8fafc 60%);color:var(--ink)}
+    .hero{background:linear-gradient(90deg,#2563eb,#7c3aed);border-radius:22px;color:#fff;padding:18px 20px}
+    .hero small{opacity:.9}
+    .card-soft{border:1px solid #edf1f7;box-shadow:0 8px 22px rgba(16,24,40,.06);background:#fff;border-radius:18px}
+    /* Fallback: force left alignment for all table cells/headers */
+    .table th, .table td { text-align: left !important; }
   </style>
 </head>
 <body class="py-4">
 <div class="container">
-  <h3 class="mb-3">Risk Insights Studio</h3>
+
+  <div class="hero mb-4 d-flex align-items-center justify-content-between flex-wrap">
+    <div>
+      <h3 class="mb-1"><i class="bi bi-graph-up-arrow me-1"></i>Risk Insights Studio</h3>
+      <small>End-to-end: data → train/tune → explain → score & export</small>
+    </div>
+    <!-- chips removed -->
+  </div>
 
   {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -392,22 +395,22 @@ TEMPLATE = """
     <div class="col-lg-4">
       <div class="card card-soft">
         <div class="card-body">
-          <h5>Actions</h5>
+          <h5 class="mb-3"><i class="bi bi-hammer"></i> Actions</h5>
           <form method="post" action="{{ url_for('do_generate') }}" class="d-grid gap-2">
-            <button class="btn btn-primary" type="submit">Generate Dummy Data</button>
+            <button class="btn btn-primary" type="submit"><i class="bi bi-magic me-1"></i>Generate Dummy Data</button>
           </form>
           <form method="post" action="{{ url_for('do_upload') }}" enctype="multipart/form-data" class="d-grid gap-2 mt-2">
             <input type="file" class="form-control" name="file" accept=".csv">
-            <button class="btn btn-outline-primary" type="submit">Upload CSV</button>
+            <button class="btn btn-outline-primary" type="submit"><i class="bi bi-upload me-1"></i>Upload CSV</button>
           </form>
           <hr>
           <form method="post" action="{{ url_for('do_train') }}" class="d-grid gap-2">
-            <button class="btn btn-success" type="submit">Train + Tune</button>
+            <button class="btn btn-success" type="submit"><i class="bi bi-cpu me-1"></i>Train + Tune</button>
           </form>
           <form method="post" action="{{ url_for('do_score') }}" class="d-grid gap-2 mt-2">
-            <button class="btn btn-warning" type="submit">Score & Bucket</button>
+            <button class="btn btn-warning" type="submit"><i class="bi bi-bullseye me-1"></i>Score & Bucket</button>
           </form>
-          <a class="btn btn-outline-secondary mt-2 w-100" href="{{ url_for('download_scored') }}">Download Scored CSV</a>
+          <a class="btn btn-outline-secondary mt-2 w-100" href="{{ url_for('download_scored') }}"><i class="bi bi-download me-1"></i>Download Scored CSV</a>
         </div>
       </div>
     </div>
@@ -415,8 +418,7 @@ TEMPLATE = """
     <div class="col-lg-8">
       <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#data" type="button">Data & Target</button></li>
-        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#train" type="button">Training & Tuning</button></li>
-        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#perf" type="button">Model Performance</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#trainperf" type="button">Performance (Deciles)</button></li>
         <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#explain" type="button">Explainability</button></li>
         <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#scores" type="button">Predictions & Leads</button></li>
       </ul>
@@ -426,8 +428,8 @@ TEMPLATE = """
         <div class="tab-pane fade show active" id="data">
           <div class="card card-soft mb-3">
             <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <h5 class="mb-0">Sample (Top 10)</h5>
+              <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="bi bi-table me-1"></i>Sample (Top 10)</h5>
                 <div><span class="badge text-bg-light">Rows: {{ rows }}</span>
                      <span class="badge text-bg-light">Cols: {{ cols }}</span></div>
               </div>
@@ -441,66 +443,36 @@ TEMPLATE = """
           {% if leakage_text %}
           <div class="card card-soft">
             <div class="card-body">
-              <h6 class="mb-1">Target leakage check</h6>
-              <p class="small">{{ leakage_text }}</p>
+              <h6 class="mb-1"><i class="bi bi-shield-lock"></i> Target leakage check</h6>
+              <p class="small text-muted">{{ leakage_text }}</p>
               <div class="table-responsive">{{ leakage_table|safe }}</div>
             </div>
           </div>
           {% endif %}
         </div>
 
-        <!-- Train & Tune -->
-        <div class="tab-pane fade" id="train">
-          <div class="card card-soft">
+        <!-- Training & Performance (deciles only) -->
+        <div class="tab-pane fade" id="trainperf"> 
+          <div class="card card-soft mb-3">
             <div class="card-body">
+              <h5 class="mb-2"><i class="bi bi-speedometer2"></i> Test — Performance by Top-% (Deciles)</h5>
               {% if perf %}
-              <div class="row g-3">
-                <div class="col"><div class="p-2 border rounded text-center">Best Params<br><b>{{ perf.best_params }}</b></div></div>
-                <div class="col"><div class="p-2 border rounded text-center">Val AUC<br><b>{{ '%.3f'|format(perf.val_auc) }}</b></div></div>
-                <div class="col"><div class="p-2 border rounded text-center">Test Acc<br><b>{{ '%.3f'|format(perf.test_acc) }}</b></div></div>
-              </div>
+                <div class="table-responsive">{{ perf.topk_test_html|safe }}</div>
+                <div class="small text-muted mt-1">Base rate (test): {{ '%.3f'|format(perf.test_base_rate) }} | N={{ perf.yte_n }}</div>
               {% else %}
-                <p class="text-muted">Train to see tuned params and scores.</p>
+                <p class="text-muted">Train to view performance tables.</p>
               {% endif %}
             </div>
           </div>
-        </div>
 
-        <!-- Performance -->
-        <div class="tab-pane fade" id="perf">
           <div class="card card-soft">
             <div class="card-body">
+              <h5 class="mb-2"><i class="bi bi-collection"></i> Train — Performance by Top-% (Deciles)</h5>
               {% if perf %}
-                <h5>Classification Report</h5>
-                <pre class="console">{{ perf.report }}</pre>
-
-                <div class="row g-4">
-                  <div class="col-md-6">
-                    <h6>ROC Curve (Test)</h6>
-                    <img class="img-fluid border rounded" src="{{ perf.roc_img }}" alt="ROC Curve"/>
-                    <div class="small text-muted mt-1">AUC: {{ '%.3f'|format(perf.roc_auc) }}</div>
-                  </div>
-                  <div class="col-md-6">
-                    <h6>Confusion Matrix (Test)</h6>
-                    <table class="table table-sm table-bordered w-auto">
-                      {% for row in perf.cm %}
-                        <tr>{% for c in row %}<td>{{ c }}</td>{% endfor %}</tr>
-                      {% endfor %}
-                    </table>
-                  </div>
-                </div>
-
-                <hr>
-                <h6>Performance by Top-% (Test)</h6>
-                <div class="table-responsive">{{ perf.topk_test_html|safe }}</div>
-                <div class="small text-muted">Base rate (test): {{ '%.3f'|format(perf.test_base_rate) }} | N={{ perf.yte_n }}</div>
-
-                <h6 class="mt-3">Performance by Top-% (Train)</h6>
                 <div class="table-responsive">{{ perf.topk_train_html|safe }}</div>
-                <div class="small text-muted">Base rate (train): {{ '%.3f'|format(perf.train_base_rate) }} | N={{ perf.ytr_n }}</div>
-
+                <div class="small text-muted mt-1">Base rate (train): {{ '%.3f'|format(perf.train_base_rate) }} | N={{ perf.ytr_n }}</div>
               {% else %}
-                <p class="text-muted">Train first to view performance.</p>
+                <p class="text-muted">Train to view performance tables.</p>
               {% endif %}
             </div>
           </div>
@@ -510,7 +482,7 @@ TEMPLATE = """
         <div class="tab-pane fade" id="explain">
           <div class="card card-soft mb-3">
             <div class="card-body">
-              <h5 class="mb-2">Global Feature Importance (CatBoost)</h5>
+              <h5 class="mb-2"><i class="bi bi-stars"></i> Global Feature Importance (CatBoost)</h5>
               <div class="table-responsive">{{ imp_html|safe }}</div>
               <h6 class="mt-3">Permutation Importance (Accuracy)</h6>
               <div class="table-responsive">{{ perm_html|safe }}</div>
@@ -518,7 +490,7 @@ TEMPLATE = """
           </div>
           <div class="card card-soft">
             <div class="card-body">
-              <h5 class="mb-2">Auto-Narrative</h5>
+              <h5 class="mb-2"><i class="bi bi-chat-right-text"></i> Auto-Narrative</h5>
               <div class="small">{{ narrative_html|safe }}</div>
             </div>
           </div>
@@ -528,11 +500,13 @@ TEMPLATE = """
         <div class="tab-pane fade" id="scores">
           <div class="card card-soft mb-3">
             <div class="card-body">
-              <h5>Bucket Summary</h5>
+              <h5 class="mb-2"><i class="bi bi-bar-chart-steps"></i> Bucket Summary</h5>
               <div class="row g-3">
                 {% for label in ['Very High','High','Moderate','Low','No Risk'] %}
                 <div class="col-6 col-md">
-                  <div class="p-2 border rounded text-center">{{ label }}<br><b>{{ counts.get(label,0) }}</b></div>
+                  <div class="p-2 border rounded text-center">
+                    {{ label }}<br><b>{{ counts.get(label,0) }}</b>
+                  </div>
                 </div>
                 {% endfor %}
               </div>
@@ -540,13 +514,13 @@ TEMPLATE = """
           </div>
           <div class="card card-soft">
             <div class="card-body">
-              <h5>Top 20 Predictions</h5>
+              <h5 class="mb-2"><i class="bi bi-person-lines-fill"></i> Top 20 Predictions</h5>
               {% if scored_html %}
                 <div class="table-responsive">{{ scored_html|safe }}</div>
               {% else %}
                 <p class="text-muted">Click “Score & Bucket”.</p>
               {% endif %}
-              <a class="btn btn-outline-secondary mt-2" href="{{ url_for('download_scored') }}">Download Scored CSV</a>
+              <a class="btn btn-outline-secondary mt-2" href="{{ url_for('download_scored') }}"><i class="bi bi-download me-1"></i>Download Scored CSV</a>
             </div>
           </div>
         </div>
@@ -562,10 +536,10 @@ TEMPLATE = """
 
 # ---------- Entrypoint ----------
 if __name__ == "__main__":
-    port = _free_port(5002)
+    port = _free_port(5008)
     url = f"http://127.0.0.1:{port}"
     print("\n===========================================")
-    print(" TMU Flask app is starting")
+    print(" Risk Insights Studio is starting")
     print(f" Visit {url}")
     print(" If nothing opens, copy-paste the URL above")
     print("===========================================\n")
