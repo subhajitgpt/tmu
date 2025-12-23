@@ -1,0 +1,14 @@
+{
+  "customer_no": "CUST007_REJECT_HIGH",
+  "utilisation": 19.7,
+  "dpd_days": 240,
+  "cash_credit_ratio": 0.33,
+  "cash_debit_ratio": 0.31,
+  "inbound_cheque_bounce_count": 12,
+  "inbound_cheque_bounce_amt": 135000,
+  "outbound_cheque_bounce_count": 10,
+  "outbound_cheque_bounce_amt": 95000,
+  "total_amt_credit": 280000,
+  "total_amt_debit": 820000,
+  "no_of_banks": 11
+}

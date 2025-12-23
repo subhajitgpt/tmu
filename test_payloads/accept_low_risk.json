@@ -1,0 +1,14 @@
+{
+  "customer_no": "CUST001_LOW_RISK",
+  "utilisation": 8.5,
+  "dpd_days": 10,
+  "cash_credit_ratio": 0.08,
+  "cash_debit_ratio": 0.07,
+  "inbound_cheque_bounce_count": 0,
+  "inbound_cheque_bounce_amt": 0,
+  "outbound_cheque_bounce_count": 0,
+  "outbound_cheque_bounce_amt": 0,
+  "total_amt_credit": 1200000,
+  "total_amt_debit": 950000,
+  "no_of_banks": 2
+}

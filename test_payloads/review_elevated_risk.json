@@ -1,0 +1,14 @@
+{
+  "customer_no": "CUST005_REVIEW_REQUIRED",
+  "utilisation": 19.1,
+  "dpd_days": 165,
+  "cash_credit_ratio": 0.30,
+  "cash_debit_ratio": 0.27,
+  "inbound_cheque_bounce_count": 8,
+  "inbound_cheque_bounce_amt": 72000,
+  "outbound_cheque_bounce_count": 6,
+  "outbound_cheque_bounce_amt": 38000,
+  "total_amt_credit": 380000,
+  "total_amt_debit": 650000,
+  "no_of_banks": 9
+}

@@ -1,0 +1,14 @@
+{
+  "customer_no": "CUST002_MODERATE_LOW",
+  "utilisation": 12.3,
+  "dpd_days": 30,
+  "cash_credit_ratio": 0.15,
+  "cash_debit_ratio": 0.12,
+  "inbound_cheque_bounce_count": 1,
+  "inbound_cheque_bounce_amt": 3500,
+  "outbound_cheque_bounce_count": 1,
+  "outbound_cheque_bounce_amt": 2000,
+  "total_amt_credit": 850000,
+  "total_amt_debit": 780000,
+  "no_of_banks": 3
+}

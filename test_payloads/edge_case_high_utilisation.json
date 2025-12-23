@@ -1,0 +1,14 @@
+{
+  "customer_no": "CUST010_HIGH_UTIL",
+  "utilisation": 19.8,
+  "dpd_days": 25,
+  "cash_credit_ratio": 0.10,
+  "cash_debit_ratio": 0.08,
+  "inbound_cheque_bounce_count": 1,
+  "inbound_cheque_bounce_amt": 2500,
+  "outbound_cheque_bounce_count": 0,
+  "outbound_cheque_bounce_amt": 0,
+  "total_amt_credit": 1800000,
+  "total_amt_debit": 1600000,
+  "no_of_banks": 2
+}

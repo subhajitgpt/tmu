@@ -1,0 +1,14 @@
+{
+  "customer_no": "CUST004_CONDITIONAL_HIGH",
+  "utilisation": 18.2,
+  "dpd_days": 120,
+  "cash_credit_ratio": 0.26,
+  "cash_debit_ratio": 0.24,
+  "inbound_cheque_bounce_count": 6,
+  "inbound_cheque_bounce_amt": 35000,
+  "outbound_cheque_bounce_count": 5,
+  "outbound_cheque_bounce_amt": 22000,
+  "total_amt_credit": 420000,
+  "total_amt_debit": 580000,
+  "no_of_banks": 7
+}

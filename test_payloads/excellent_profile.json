@@ -1,0 +1,14 @@
+{
+  "customer_no": "CUST009_EXCELLENT",
+  "utilisation": 4.2,
+  "dpd_days": 0,
+  "cash_credit_ratio": 0.05,
+  "cash_debit_ratio": 0.04,
+  "inbound_cheque_bounce_count": 0,
+  "inbound_cheque_bounce_amt": 0,
+  "outbound_cheque_bounce_count": 0,
+  "outbound_cheque_bounce_amt": 0,
+  "total_amt_credit": 2500000,
+  "total_amt_debit": 1200000,
+  "no_of_banks": 1
+}

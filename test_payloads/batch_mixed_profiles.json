@@ -1,0 +1,74 @@
+{
+  "customers": [
+    {
+      "customer_no": "BATCH_001_ACCEPT",
+      "utilisation": 9.2,
+      "dpd_days": 15,
+      "cash_credit_ratio": 0.10,
+      "cash_debit_ratio": 0.08,
+      "inbound_cheque_bounce_count": 0,
+      "inbound_cheque_bounce_amt": 0,
+      "outbound_cheque_bounce_count": 0,
+      "outbound_cheque_bounce_amt": 0,
+      "total_amt_credit": 1100000,
+      "total_amt_debit": 950000,
+      "no_of_banks": 2
+    },
+    {
+      "customer_no": "BATCH_002_CONDITIONAL",
+      "utilisation": 17.3,
+      "dpd_days": 105,
+      "cash_credit_ratio": 0.24,
+      "cash_debit_ratio": 0.21,
+      "inbound_cheque_bounce_count": 5,
+      "inbound_cheque_bounce_amt": 28000,
+      "outbound_cheque_bounce_count": 4,
+      "outbound_cheque_bounce_amt": 18000,
+      "total_amt_credit": 480000,
+      "total_amt_debit": 590000,
+      "no_of_banks": 6
+    },
+    {
+      "customer_no": "BATCH_003_REVIEW",
+      "utilisation": 19.2,
+      "dpd_days": 180,
+      "cash_credit_ratio": 0.31,
+      "cash_debit_ratio": 0.28,
+      "inbound_cheque_bounce_count": 9,
+      "inbound_cheque_bounce_amt": 82000,
+      "outbound_cheque_bounce_count": 7,
+      "outbound_cheque_bounce_amt": 45000,
+      "total_amt_credit": 350000,
+      "total_amt_debit": 680000,
+      "no_of_banks": 9
+    },
+    {
+      "customer_no": "BATCH_004_REJECT",
+      "utilisation": 19.8,
+      "dpd_days": 280,
+      "cash_credit_ratio": 0.34,
+      "cash_debit_ratio": 0.32,
+      "inbound_cheque_bounce_count": 16,
+      "inbound_cheque_bounce_amt": 195000,
+      "outbound_cheque_bounce_count": 13,
+      "outbound_cheque_bounce_amt": 145000,
+      "total_amt_credit": 220000,
+      "total_amt_debit": 880000,
+      "no_of_banks": 13
+    },
+    {
+      "customer_no": "BATCH_005_EXCELLENT",
+      "utilisation": 5.8,
+      "dpd_days": 5,
+      "cash_credit_ratio": 0.06,
+      "cash_debit_ratio": 0.05,
+      "inbound_cheque_bounce_count": 0,
+      "inbound_cheque_bounce_amt": 0,
+      "outbound_cheque_bounce_count": 0,
+      "outbound_cheque_bounce_amt": 0,
+      "total_amt_credit": 2100000,
+      "total_amt_debit": 1400000,
+      "no_of_banks": 1
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "customer_no": "CUST011_MANY_BANKS",
+  "utilisation": 14.5,
+  "dpd_days": 60,
+  "cash_credit_ratio": 0.18,
+  "cash_debit_ratio": 0.16,
+  "inbound_cheque_bounce_count": 3,
+  "inbound_cheque_bounce_amt": 15000,
+  "outbound_cheque_bounce_count": 2,
+  "outbound_cheque_bounce_amt": 8000,
+  "total_amt_credit": 680000,
+  "total_amt_debit": 720000,
+  "no_of_banks": 15
+}
