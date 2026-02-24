@@ -37,6 +37,10 @@ Python 3.8+
 pip install -r requirements.txt
 ```
 
+On Windows, if `python` isn't found in PowerShell, use either:
+- the Python launcher: `py ...`
+- or the workspace venv interpreter: `./.venv/Scripts/python.exe ...`
+
 ### Installation
 
 1. **Install dependencies**
@@ -46,7 +50,7 @@ pip install -r requirements.txt
 
 2. **Train the model**
 ```powershell
-python train_and_save_model.py
+./.venv/Scripts/python.exe train_and_save_model.py
 ```
 This will:
 - Generate 50,000 training samples
@@ -56,7 +60,7 @@ This will:
 
 3. **Start the API server**
 ```powershell
-python credit_scoring_api.py
+./.venv/Scripts/python.exe credit_scoring_api.py
 ```
 The API will be available at `http://localhost:5000`
 

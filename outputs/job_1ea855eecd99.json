@@ -1,0 +1,714 @@
+{
+  "job_id": "1ea855eecd99",
+  "status": "COMPLETED",
+  "created_at": "2026-02-23T12:30:36.498009+00:00",
+  "started_at": "2026-02-23T12:30:36.498009+00:00",
+  "ended_at": "2026-02-23T12:30:36.586971+00:00",
+  "done": 5,
+  "total": 5,
+  "summary": {
+    "total": 5,
+    "accepted": 4,
+    "conditional_accept": 0,
+    "review": 0,
+    "rejected": 1,
+    "errors": 0,
+    "avg_score": 0.21,
+    "max_score": 0.9953
+  },
+  "results": [
+    {
+      "item": 0,
+      "customer_id": "BATCH_001_ACCEPT",
+      "risk_score": {
+        "probability": 0.0,
+        "probability_percentage": "0.00%",
+        "bucket": "No Risk"
+      },
+      "score": 0.0,
+      "decision": "ACCEPT",
+      "decision_detail": {
+        "status": "ACCEPT",
+        "recommendation": "Application approved",
+        "risk_level": "Low",
+        "action": "Grant credit with standard terms",
+        "reason": "Probability below acceptance threshold",
+        "policy": "probability < 0.50",
+        "explanation": "Customer shows a 0.0% probability of default, classified as 'No Risk' risk. This is within acceptable parameters."
+      },
+      "reason": "Probability below acceptance threshold",
+      "recommendation": "Application approved",
+      "policy": "probability < 0.50",
+      "explanation": [
+        {
+          "factor": "utilisation",
+          "impact": 0.092,
+          "summary": "Utilisation at 9.2%"
+        },
+        {
+          "factor": "dpd_days",
+          "impact": 0.0411,
+          "summary": "DPD days at 15"
+        },
+        {
+          "factor": "bounce_count",
+          "impact": 0.0,
+          "summary": "Cheque bounce count pattern"
+        },
+        {
+          "factor": "decision_policy",
+          "impact": 0.0,
+          "summary": "Decision rules (probability of default): < 0.50 => ACCEPT; < 0.70 => CONDITIONAL_ACCEPT; < 0.80 => REVIEW; >= 0.80 => REJECT"
+        }
+      ],
+      "features": {
+        "utilisation": 9.2,
+        "dpd_days": 15.0,
+        "cash_credit_ratio": 0.1,
+        "cash_debit_ratio": 0.08,
+        "inbound_cheque_bounce_count": 0.0,
+        "inbound_cheque_bounce_amt": 0.0,
+        "outbound_cheque_bounce_count": 0.0,
+        "outbound_cheque_bounce_amt": 0.0,
+        "total_amt_credit": 1100000.0,
+        "total_amt_debit": 950000.0,
+        "no_of_banks": 2.0
+      }
+    },
+    {
+      "item": 1,
+      "customer_id": "BATCH_002_CONDITIONAL",
+      "risk_score": {
+        "probability": 0.0003,
+        "probability_percentage": "0.03%",
+        "bucket": "No Risk"
+      },
+      "score": 0.0003,
+      "decision": "ACCEPT",
+      "decision_detail": {
+        "status": "ACCEPT",
+        "recommendation": "Application approved",
+        "risk_level": "Low",
+        "action": "Grant credit with standard terms",
+        "reason": "Probability below acceptance threshold",
+        "policy": "probability < 0.50",
+        "explanation": "Customer shows a 0.0% probability of default, classified as 'No Risk' risk. This is within acceptable parameters."
+      },
+      "reason": "Probability below acceptance threshold",
+      "recommendation": "Application approved",
+      "policy": "probability < 0.50",
+      "explanation": [
+        {
+          "factor": "bounce_count",
+          "impact": 0.3,
+          "summary": "Cheque bounce count pattern"
+        },
+        {
+          "factor": "dpd_days",
+          "impact": 0.2877,
+          "summary": "DPD days at 105"
+        },
+        {
+          "factor": "utilisation",
+          "impact": 0.173,
+          "summary": "Utilisation at 17.3%"
+        },
+        {
+          "factor": "decision_policy",
+          "impact": 0.0003,
+          "summary": "Decision rules (probability of default): < 0.50 => ACCEPT; < 0.70 => CONDITIONAL_ACCEPT; < 0.80 => REVIEW; >= 0.80 => REJECT"
+        }
+      ],
+      "features": {
+        "utilisation": 17.3,
+        "dpd_days": 105.0,
+        "cash_credit_ratio": 0.24,
+        "cash_debit_ratio": 0.21,
+        "inbound_cheque_bounce_count": 5.0,
+        "inbound_cheque_bounce_amt": 28000.0,
+        "outbound_cheque_bounce_count": 4.0,
+        "outbound_cheque_bounce_amt": 18000.0,
+        "total_amt_credit": 480000.0,
+        "total_amt_debit": 590000.0,
+        "no_of_banks": 6.0
+      }
+    },
+    {
+      "item": 2,
+      "customer_id": "BATCH_003_REVIEW",
+      "risk_score": {
+        "probability": 0.0542,
+        "probability_percentage": "5.42%",
+        "bucket": "No Risk"
+      },
+      "score": 0.0542,
+      "decision": "ACCEPT",
+      "decision_detail": {
+        "status": "ACCEPT",
+        "recommendation": "Application approved",
+        "risk_level": "Low",
+        "action": "Grant credit with standard terms",
+        "reason": "Probability below acceptance threshold",
+        "policy": "probability < 0.50",
+        "explanation": "Customer shows a 5.4% probability of default, classified as 'No Risk' risk. This is within acceptable parameters."
+      },
+      "reason": "Probability below acceptance threshold",
+      "recommendation": "Application approved",
+      "policy": "probability < 0.50",
+      "explanation": [
+        {
+          "factor": "bounce_count",
+          "impact": 0.5333,
+          "summary": "Cheque bounce count pattern"
+        },
+        {
+          "factor": "dpd_days",
+          "impact": 0.4932,
+          "summary": "DPD days at 180"
+        },
+        {
+          "factor": "bounce_amount",
+          "impact": 0.4233,
+          "summary": "Cheque bounce amount exposure"
+        },
+        {
+          "factor": "decision_policy",
+          "impact": 0.0542,
+          "summary": "Decision rules (probability of default): < 0.50 => ACCEPT; < 0.70 => CONDITIONAL_ACCEPT; < 0.80 => REVIEW; >= 0.80 => REJECT"
+        }
+      ],
+      "features": {
+        "utilisation": 19.2,
+        "dpd_days": 180.0,
+        "cash_credit_ratio": 0.31,
+        "cash_debit_ratio": 0.28,
+        "inbound_cheque_bounce_count": 9.0,
+        "inbound_cheque_bounce_amt": 82000.0,
+        "outbound_cheque_bounce_count": 7.0,
+        "outbound_cheque_bounce_amt": 45000.0,
+        "total_amt_credit": 350000.0,
+        "total_amt_debit": 680000.0,
+        "no_of_banks": 9.0
+      }
+    },
+    {
+      "item": 3,
+      "customer_id": "BATCH_004_REJECT",
+      "risk_score": {
+        "probability": 0.9953,
+        "probability_percentage": "99.53%",
+        "bucket": "Very High"
+      },
+      "score": 0.9953,
+      "decision": "REJECT",
+      "decision_detail": {
+        "status": "REJECT",
+        "recommendation": "Application rejected due to high credit risk",
+        "risk_level": "Critical",
+        "action": "Deny credit immediately",
+        "reason": "Probability exceeds rejection threshold",
+        "policy": "probability >= 0.80",
+        "explanation": "Customer shows a 99.5% probability of default, classified as 'Very High' risk. This exceeds acceptable risk thresholds."
+      },
+      "reason": "Probability exceeds rejection threshold",
+      "recommendation": "Application rejected due to high credit risk",
+      "policy": "probability >= 0.80",
+      "explanation": [
+        {
+          "factor": "bounce_amount",
+          "impact": 1.0,
+          "summary": "Cheque bounce amount exposure"
+        },
+        {
+          "factor": "bounce_count",
+          "impact": 0.9667,
+          "summary": "Cheque bounce count pattern"
+        },
+        {
+          "factor": "dpd_days",
+          "impact": 0.7671,
+          "summary": "DPD days at 280"
+        },
+        {
+          "factor": "decision_policy",
+          "impact": 0.9953,
+          "summary": "Decision rules (probability of default): < 0.50 => ACCEPT; < 0.70 => CONDITIONAL_ACCEPT; < 0.80 => REVIEW; >= 0.80 => REJECT"
+        }
+      ],
+      "features": {
+        "utilisation": 19.8,
+        "dpd_days": 280.0,
+        "cash_credit_ratio": 0.34,
+        "cash_debit_ratio": 0.32,
+        "inbound_cheque_bounce_count": 16.0,
+        "inbound_cheque_bounce_amt": 195000.0,
+        "outbound_cheque_bounce_count": 13.0,
+        "outbound_cheque_bounce_amt": 145000.0,
+        "total_amt_credit": 220000.0,
+        "total_amt_debit": 880000.0,
+        "no_of_banks": 13.0
+      }
+    },
+    {
+      "item": 4,
+      "customer_id": "BATCH_005_EXCELLENT",
+      "risk_score": {
+        "probability": 0.0,
+        "probability_percentage": "0.00%",
+        "bucket": "No Risk"
+      },
+      "score": 0.0,
+      "decision": "ACCEPT",
+      "decision_detail": {
+        "status": "ACCEPT",
+        "recommendation": "Application approved",
+        "risk_level": "Low",
+        "action": "Grant credit with standard terms",
+        "reason": "Probability below acceptance threshold",
+        "policy": "probability < 0.50",
+        "explanation": "Customer shows a 0.0% probability of default, classified as 'No Risk' risk. This is within acceptable parameters."
+      },
+      "reason": "Probability below acceptance threshold",
+      "recommendation": "Application approved",
+      "policy": "probability < 0.50",
+      "explanation": [
+        {
+          "factor": "utilisation",
+          "impact": 0.058,
+          "summary": "Utilisation at 5.8%"
+        },
+        {
+          "factor": "dpd_days",
+          "impact": 0.0137,
+          "summary": "DPD days at 5"
+        },
+        {
+          "factor": "bounce_count",
+          "impact": 0.0,
+          "summary": "Cheque bounce count pattern"
+        },
+        {
+          "factor": "decision_policy",
+          "impact": 0.0,
+          "summary": "Decision rules (probability of default): < 0.50 => ACCEPT; < 0.70 => CONDITIONAL_ACCEPT; < 0.80 => REVIEW; >= 0.80 => REJECT"
+        }
+      ],
+      "features": {
+        "utilisation": 5.8,
+        "dpd_days": 5.0,
+        "cash_credit_ratio": 0.06,
+        "cash_debit_ratio": 0.05,
+        "inbound_cheque_bounce_count": 0.0,
+        "inbound_cheque_bounce_amt": 0.0,
+        "outbound_cheque_bounce_count": 0.0,
+        "outbound_cheque_bounce_amt": 0.0,
+        "total_amt_credit": 2100000.0,
+        "total_amt_debit": 1400000.0,
+        "no_of_banks": 1.0
+      }
+    }
+  ],
+  "audit": [
+    {
+      "timestamp": "2026-02-23T12:30:36.498009+00:00",
+      "step": "flow",
+      "item": null,
+      "message": "Batch flow started",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.500110+00:00",
+      "step": "flow",
+      "item": 0,
+      "message": "Starting item flow",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.501363+00:00",
+      "step": "validate",
+      "item": 0,
+      "message": "Starting validation for BATCH_001_ACCEPT",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.502360+00:00",
+      "step": "validate",
+      "item": 0,
+      "message": "Validation successful",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.504895+00:00",
+      "step": "score",
+      "item": 0,
+      "message": "Computing score",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.510477+00:00",
+      "step": "score",
+      "item": 0,
+      "message": "Probability computed: 0.0000",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.511473+00:00",
+      "step": "bucket",
+      "item": 0,
+      "message": "Risk bucket: No Risk",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.511473+00:00",
+      "step": "decide",
+      "item": 0,
+      "message": "Applying decision thresholds",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.512470+00:00",
+      "step": "decide",
+      "item": 0,
+      "message": "Decision: ACCEPT",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.513300+00:00",
+      "step": "explain",
+      "item": 0,
+      "message": "Generating deterministic explanation",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.513809+00:00",
+      "step": "explain",
+      "item": 0,
+      "message": "Explanation completed",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.515086+00:00",
+      "step": "flow",
+      "item": 0,
+      "message": "Completed item flow",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.517804+00:00",
+      "step": "flow",
+      "item": 1,
+      "message": "Starting item flow",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.519802+00:00",
+      "step": "validate",
+      "item": 1,
+      "message": "Starting validation for BATCH_002_CONDITIONAL",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.520798+00:00",
+      "step": "validate",
+      "item": 1,
+      "message": "Validation successful",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.520798+00:00",
+      "step": "score",
+      "item": 1,
+      "message": "Computing score",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.525799+00:00",
+      "step": "score",
+      "item": 1,
+      "message": "Probability computed: 0.0003",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.526818+00:00",
+      "step": "bucket",
+      "item": 1,
+      "message": "Risk bucket: No Risk",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.527814+00:00",
+      "step": "decide",
+      "item": 1,
+      "message": "Applying decision thresholds",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.528815+00:00",
+      "step": "decide",
+      "item": 1,
+      "message": "Decision: ACCEPT",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.529812+00:00",
+      "step": "explain",
+      "item": 1,
+      "message": "Generating deterministic explanation",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.530809+00:00",
+      "step": "explain",
+      "item": 1,
+      "message": "Explanation completed",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.530809+00:00",
+      "step": "flow",
+      "item": 1,
+      "message": "Completed item flow",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.531805+00:00",
+      "step": "flow",
+      "item": 2,
+      "message": "Starting item flow",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.532801+00:00",
+      "step": "validate",
+      "item": 2,
+      "message": "Starting validation for BATCH_003_REVIEW",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.532801+00:00",
+      "step": "validate",
+      "item": 2,
+      "message": "Validation successful",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.534303+00:00",
+      "step": "score",
+      "item": 2,
+      "message": "Computing score",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.542882+00:00",
+      "step": "score",
+      "item": 2,
+      "message": "Probability computed: 0.0542",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.543878+00:00",
+      "step": "bucket",
+      "item": 2,
+      "message": "Risk bucket: No Risk",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.544383+00:00",
+      "step": "decide",
+      "item": 2,
+      "message": "Applying decision thresholds",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.545139+00:00",
+      "step": "decide",
+      "item": 2,
+      "message": "Decision: ACCEPT",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.546147+00:00",
+      "step": "explain",
+      "item": 2,
+      "message": "Generating deterministic explanation",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.547166+00:00",
+      "step": "explain",
+      "item": 2,
+      "message": "Explanation completed",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.547166+00:00",
+      "step": "flow",
+      "item": 2,
+      "message": "Completed item flow",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.548288+00:00",
+      "step": "flow",
+      "item": 3,
+      "message": "Starting item flow",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.548288+00:00",
+      "step": "validate",
+      "item": 3,
+      "message": "Starting validation for BATCH_004_REJECT",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.549685+00:00",
+      "step": "validate",
+      "item": 3,
+      "message": "Validation successful",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.551021+00:00",
+      "step": "score",
+      "item": 3,
+      "message": "Computing score",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.555468+00:00",
+      "step": "score",
+      "item": 3,
+      "message": "Probability computed: 0.9953",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.555974+00:00",
+      "step": "bucket",
+      "item": 3,
+      "message": "Risk bucket: Very High",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.556999+00:00",
+      "step": "decide",
+      "item": 3,
+      "message": "Applying decision thresholds",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.557996+00:00",
+      "step": "decide",
+      "item": 3,
+      "message": "Decision: REJECT",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.557996+00:00",
+      "step": "explain",
+      "item": 3,
+      "message": "Generating deterministic explanation",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.559355+00:00",
+      "step": "explain",
+      "item": 3,
+      "message": "Explanation completed",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.560357+00:00",
+      "step": "flow",
+      "item": 3,
+      "message": "Completed item flow",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.561354+00:00",
+      "step": "flow",
+      "item": 4,
+      "message": "Starting item flow",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.561354+00:00",
+      "step": "validate",
+      "item": 4,
+      "message": "Starting validation for BATCH_005_EXCELLENT",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.562600+00:00",
+      "step": "validate",
+      "item": 4,
+      "message": "Validation successful",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.563605+00:00",
+      "step": "score",
+      "item": 4,
+      "message": "Computing score",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.567914+00:00",
+      "step": "score",
+      "item": 4,
+      "message": "Probability computed: 0.0000",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.568919+00:00",
+      "step": "bucket",
+      "item": 4,
+      "message": "Risk bucket: No Risk",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.569917+00:00",
+      "step": "decide",
+      "item": 4,
+      "message": "Applying decision thresholds",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.569917+00:00",
+      "step": "decide",
+      "item": 4,
+      "message": "Decision: ACCEPT",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.571225+00:00",
+      "step": "explain",
+      "item": 4,
+      "message": "Generating deterministic explanation",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.571225+00:00",
+      "step": "explain",
+      "item": 4,
+      "message": "Explanation completed",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.572508+00:00",
+      "step": "flow",
+      "item": 4,
+      "message": "Completed item flow",
+      "job_id": "1ea855eecd99"
+    },
+    {
+      "timestamp": "2026-02-23T12:30:36.586971+00:00",
+      "step": "flow",
+      "item": null,
+      "message": "Batch flow completed",
+      "job_id": "1ea855eecd99"
+    }
+  ],
+  "error": null,
+  "output_file": "outputs/job_1ea855eecd99.json"
+}

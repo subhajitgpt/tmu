@@ -1,0 +1,586 @@
+{
+  "name": "Credit Scoring Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "credit-score",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-1",
+      "name": "Webhook - Credit Application",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "credit-score-webhook"
+    },
+    {
+      "parameters": {
+        "functionCode": "// Validate incoming credit application data\nconst requiredFeatures = [\n  'utilisation', 'dpd_days', 'cash_credit_ratio', 'cash_debit_ratio',\n  'inbound_cheque_bounce_count', 'inbound_cheque_bounce_amt',\n  'outbound_cheque_bounce_count', 'outbound_cheque_bounce_amt',\n  'total_amt_credit', 'total_amt_debit', 'no_of_banks'\n];\n\nconst data = items[0].json.body;\n\n// Check for missing fields\nconst missing = requiredFeatures.filter(f => !(f in data));\nif (missing.length > 0) {\n  throw new Error(`Missing required features: ${missing.join(', ')}`);\n}\n\n// Validate numeric values and ranges\nfor (const feature of requiredFeatures) {\n  const value = parseFloat(data[feature]);\n  if (isNaN(value) || !isFinite(value)) {\n    throw new Error(`Feature '${feature}' must be numeric, got: ${data[feature]}`);\n  }\n}\n\n// Range validations\nif (data.utilisation < 0 || data.utilisation > 100) {\n  throw new Error('utilisation must be between 0 and 100');\n}\n\nif (data.dpd_days < 0) {\n  throw new Error('dpd_days cannot be negative');\n}\n\nif (data.no_of_banks < 0) {\n  throw new Error('no_of_banks cannot be negative');\n}\n\n// Prepare clean data for ML service\nconst cleanData = {\n  customer_id: data.customer_no || 'N/A',\n  features: {\n    utilisation: parseFloat(data.utilisation),\n    dpd_days: parseFloat(data.dpd_days),\n    cash_credit_ratio: parseFloat(data.cash_credit_ratio),\n    cash_debit_ratio: parseFloat(data.cash_debit_ratio),\n    inbound_cheque_bounce_count: parseFloat(data.inbound_cheque_bounce_count),\n    inbound_cheque_bounce_amt: parseFloat(data.inbound_cheque_bounce_amt),\n    outbound_cheque_bounce_count: parseFloat(data.outbound_cheque_bounce_count),\n    outbound_cheque_bounce_amt: parseFloat(data.outbound_cheque_bounce_amt),\n    total_amt_credit: parseFloat(data.total_amt_credit),\n    total_amt_debit: parseFloat(data.total_amt_debit),\n    no_of_banks: parseFloat(data.no_of_banks)\n  }\n};\n\nreturn { json: cleanData };"
+      },
+      "id": "function-validate",
+      "name": "Validate Input",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:5064/predict",
+        "method": "POST",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "id": "http-ml-service",
+      "name": "ML Service - Get Prediction",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Calculate risk bucket and prepare decision data\nconst mlResponse = items[0].json;\nconst probability = mlResponse.probability;\nconst customer_id = mlResponse.customer_id || $node['Validate Input'].json.customer_id;\n\n// Determine risk bucket\nlet bucket;\nif (probability >= 0.90) {\n  bucket = 'Very High';\n} else if (probability >= 0.80) {\n  bucket = 'High';\n} else if (probability >= 0.70) {\n  bucket = 'Moderate';\n} else if (probability >= 0.50) {\n  bucket = 'Low';\n} else {\n  bucket = 'No Risk';\n}\n\n// Determine decision status\nlet status;\nif (probability >= 0.80) {\n  status = 'REJECT';\n} else if (probability >= 0.70) {\n  status = 'REVIEW';\n} else if (probability >= 0.50) {\n  status = 'CONDITIONAL_ACCEPT';\n} else {\n  status = 'ACCEPT';\n}\n\nreturn {\n  json: {\n    customer_id: customer_id,\n    probability: probability,\n    probability_percentage: `${(probability * 100).toFixed(2)}%`,\n    bucket: bucket,\n    status: status,\n    shap_values: mlResponse.shap_values || [],\n    features: $node['Validate Input'].json.features,\n    timestamp: new Date().toISOString()\n  }\n};"
+      },
+      "id": "function-bucket",
+      "name": "Calculate Risk Bucket",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "number": [
+                  {
+                    "value1": "={{ $json.probability }}",
+                    "value2": 0.8,
+                    "operation": "largerEqual"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "reject"
+            },
+            {
+              "conditions": {
+                "number": [
+                  {
+                    "value1": "={{ $json.probability }}",
+                    "value2": 0.7,
+                    "operation": "largerEqual"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "review"
+            },
+            {
+              "conditions": {
+                "number": [
+                  {
+                    "value1": "={{ $json.probability }}",
+                    "value2": 0.5,
+                    "operation": "largerEqual"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "conditional"
+            },
+            {
+              "conditions": {
+                "number": [
+                  {
+                    "value1": "={{ $json.probability }}",
+                    "value2": 0.5,
+                    "operation": "smaller"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "accept"
+            }
+          ]
+        }
+      },
+      "id": "switch-decision",
+      "name": "Route By Decision",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "decision.status",
+              "value": "REJECT"
+            },
+            {
+              "name": "decision.recommendation",
+              "value": "Application rejected due to high credit risk"
+            },
+            {
+              "name": "decision.risk_level",
+              "value": "Critical"
+            },
+            {
+              "name": "decision.action",
+              "value": "Deny credit immediately"
+            },
+            {
+              "name": "decision.explanation",
+              "value": "={{ `Customer shows a ${($json.probability * 100).toFixed(1)}% probability of default, classified as '${$json.bucket}' risk. This exceeds acceptable risk thresholds. Key risk indicators suggest high likelihood of payment default.` }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "set-reject",
+      "name": "Set REJECT Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [1250, 100]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "decision.status",
+              "value": "REVIEW"
+            },
+            {
+              "name": "decision.recommendation",
+              "value": "Requires manual review by credit officer"
+            },
+            {
+              "name": "decision.risk_level",
+              "value": "Elevated"
+            },
+            {
+              "name": "decision.action",
+              "value": "Conduct detailed assessment with additional documentation"
+            },
+            {
+              "name": "decision.explanation",
+              "value": "={{ `Customer shows a ${($json.probability * 100).toFixed(1)}% probability of default, classified as '${$json.bucket}' risk. This warrants careful evaluation. Consider requesting additional collateral or guarantors.` }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "set-review",
+      "name": "Set REVIEW Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [1250, 250]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "decision.status",
+              "value": "CONDITIONAL_ACCEPT"
+            },
+            {
+              "name": "decision.recommendation",
+              "value": "Accept with enhanced monitoring"
+            },
+            {
+              "name": "decision.risk_level",
+              "value": "Moderate"
+            },
+            {
+              "name": "decision.action",
+              "value": "Approve with stricter terms (lower limit, higher interest rate)"
+            },
+            {
+              "name": "decision.explanation",
+              "value": "={{ `Customer shows a ${($json.probability * 100).toFixed(1)}% probability of default, classified as '${$json.bucket}' risk. Acceptable with risk mitigation measures. Recommend regular monitoring and conservative credit limits.` }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "set-conditional",
+      "name": "Set CONDITIONAL Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [1250, 400]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "decision.status",
+              "value": "ACCEPT"
+            },
+            {
+              "name": "decision.recommendation",
+              "value": "Application approved"
+            },
+            {
+              "name": "decision.risk_level",
+              "value": "Low"
+            },
+            {
+              "name": "decision.action",
+              "value": "Grant credit with standard terms"
+            },
+            {
+              "name": "decision.explanation",
+              "value": "={{ `Customer shows a ${($json.probability * 100).toFixed(1)}% probability of default, classified as '${$json.bucket}' risk. This is within acceptable parameters. Customer profile indicates good creditworthiness.` }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "set-accept",
+      "name": "Set ACCEPT Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [1250, 550]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "customer_id",
+              "field2": "customer_id"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "merge-decisions",
+      "name": "Merge All Decisions",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [1450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "schema": "public",
+        "table": "credit_decisions",
+        "columns": "customer_id, probability, bucket, decision_status, timestamp",
+        "additionalFields": {
+          "values": "={{ $json.customer_id }}, {{ $json.probability }}, {{ $json.bucket }}, {{ $json['decision.status'] }}, {{ $json.timestamp }}"
+        }
+      },
+      "id": "postgres-log",
+      "name": "Log to PostgreSQL",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.2,
+      "position": [1650, 300],
+      "credentials": {
+        "postgres": {
+          "id": "1",
+          "name": "PostgreSQL account"
+        }
+      },
+      "disabled": true,
+      "notes": "Enable and configure PostgreSQL credentials"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.probability }}",
+              "value2": 0.7,
+              "operation": "largerEqual"
+            }
+          ]
+        }
+      },
+      "id": "if-high-risk",
+      "name": "IF High Risk?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1850, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "credit-system@company.com",
+        "toEmail": "compliance@company.com",
+        "subject": "🚨 High Risk Credit Application - {{ $json.customer_id }}",
+        "emailType": "html",
+        "message": "<h2>High Risk Credit Application Alert</h2>\n<p><strong>Customer ID:</strong> {{ $json.customer_id }}</p>\n<p><strong>Risk Probability:</strong> {{ $json.probability_percentage }}</p>\n<p><strong>Risk Bucket:</strong> {{ $json.bucket }}</p>\n<p><strong>Decision:</strong> {{ $json['decision.status'] }}</p>\n<p><strong>Recommendation:</strong> {{ $json['decision.recommendation'] }}</p>\n<hr>\n<p><strong>Timestamp:</strong> {{ $json.timestamp }}</p>\n<p>Please review this application in the credit management system.</p>"
+      },
+      "id": "email-alert",
+      "name": "Email Compliance Team",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [2050, 200],
+      "credentials": {
+        "smtp": {
+          "id": "2",
+          "name": "SMTP account"
+        }
+      },
+      "disabled": true,
+      "notes": "Enable and configure SMTP credentials"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C12345678",
+          "mode": "id"
+        },
+        "text": "🔍 *Manual Review Required*\n\n*Customer:* {{ $json.customer_id }}\n*Risk Score:* {{ $json.probability_percentage }}\n*Bucket:* {{ $json.bucket }}\n*Decision:* {{ $json['decision.status'] }}\n\n{{ $json['decision.explanation'] }}",
+        "otherOptions": {}
+      },
+      "id": "slack-notify",
+      "name": "Slack Credit Officers",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [2050, 350],
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "3",
+          "name": "Slack account"
+        }
+      },
+      "disabled": true,
+      "notes": "Enable and configure Slack credentials"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ {\n  \"customer_id\": $json.customer_id,\n  \"timestamp\": $json.timestamp,\n  \"risk_score\": {\n    \"probability\": $json.probability,\n    \"probability_percentage\": $json.probability_percentage,\n    \"bucket\": $json.bucket\n  },\n  \"decision\": {\n    \"status\": $json['decision.status'],\n    \"recommendation\": $json['decision.recommendation'],\n    \"risk_level\": $json['decision.risk_level'],\n    \"action\": $json['decision.action'],\n    \"explanation\": $json['decision.explanation']\n  },\n  \"model_version\": \"1.0\",\n  \"logged\": true\n} }}",
+        "options": {}
+      },
+      "id": "webhook-response",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [2250, 300]
+    }
+  ],
+  "connections": {
+    "Webhook - Credit Application": {
+      "main": [
+        [
+          {
+            "node": "Validate Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Input": {
+      "main": [
+        [
+          {
+            "node": "ML Service - Get Prediction",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ML Service - Get Prediction": {
+      "main": [
+        [
+          {
+            "node": "Calculate Risk Bucket",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Risk Bucket": {
+      "main": [
+        [
+          {
+            "node": "Route By Decision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route By Decision": {
+      "main": [
+        [
+          {
+            "node": "Set REJECT Response",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set REVIEW Response",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set CONDITIONAL Response",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set ACCEPT Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set REJECT Response": {
+      "main": [
+        [
+          {
+            "node": "Merge All Decisions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set REVIEW Response": {
+      "main": [
+        [
+          {
+            "node": "Merge All Decisions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set CONDITIONAL Response": {
+      "main": [
+        [
+          {
+            "node": "Merge All Decisions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set ACCEPT Response": {
+      "main": [
+        [
+          {
+            "node": "Merge All Decisions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge All Decisions": {
+      "main": [
+        [
+          {
+            "node": "Log to PostgreSQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log to PostgreSQL": {
+      "main": [
+        [
+          {
+            "node": "IF High Risk?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF High Risk?": {
+      "main": [
+        [
+          {
+            "node": "Email Compliance Team",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Slack Credit Officers",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Compliance Team": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack Credit Officers": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "id": "credit-scoring-workflow",
+  "meta": {
+    "instanceId": "credit-scoring-instance"
+  },
+  "tags": [
+    {
+      "name": "credit-scoring",
+      "id": "1"
+    },
+    {
+      "name": "ml-workflow",
+      "id": "2"
+    }
+  ]
+}

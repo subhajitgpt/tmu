@@ -1,0 +1,457 @@
+{"timestamp": "2026-02-23T12:18:49.014813+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST001_LOW_RISK", "job_id": "sync-test"}
+{"timestamp": "2026-02-23T12:18:49.016164+00:00", "step": "validate", "item": 0, "message": "Validation successful", "job_id": "sync-test"}
+{"timestamp": "2026-02-23T12:18:49.017161+00:00", "step": "score", "item": 0, "message": "Computing score", "job_id": "sync-test"}
+{"timestamp": "2026-02-23T12:18:49.017664+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0388", "job_id": "sync-test"}
+{"timestamp": "2026-02-23T12:18:49.017664+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk", "job_id": "sync-test"}
+{"timestamp": "2026-02-23T12:18:49.017664+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds", "job_id": "sync-test"}
+{"timestamp": "2026-02-23T12:18:49.019177+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT", "job_id": "sync-test"}
+{"timestamp": "2026-02-23T12:18:49.019177+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation", "job_id": "sync-test"}
+{"timestamp": "2026-02-23T12:18:49.019177+00:00", "step": "explain", "item": 0, "message": "Explanation completed", "job_id": "sync-test"}
+{"timestamp": "2026-02-23T12:18:49.021419+00:00", "step": "flow", "item": null, "message": "Batch flow started", "job_id": "66ecb931753b"}
+{"timestamp": "2026-02-23T12:18:49.022842+00:00", "step": "flow", "item": 0, "message": "Starting item flow", "job_id": "66ecb931753b"}
+{"timestamp": "2026-02-23T12:18:49.022842+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST001_LOW_RISK", "job_id": "66ecb931753b"}
+{"timestamp": "2026-02-23T12:18:49.022842+00:00", "step": "validate", "item": 0, "message": "Validation successful", "job_id": "66ecb931753b"}
+{"timestamp": "2026-02-23T12:18:49.022842+00:00", "step": "score", "item": 0, "message": "Computing score", "job_id": "66ecb931753b"}
+{"timestamp": "2026-02-23T12:18:49.023926+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0388", "job_id": "66ecb931753b"}
+{"timestamp": "2026-02-23T12:18:49.023926+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk", "job_id": "66ecb931753b"}
+{"timestamp": "2026-02-23T12:18:49.023926+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds", "job_id": "66ecb931753b"}
+{"timestamp": "2026-02-23T12:18:49.024992+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT", "job_id": "66ecb931753b"}
+{"timestamp": "2026-02-23T12:18:49.024992+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation", "job_id": "66ecb931753b"}
+{"timestamp": "2026-02-23T12:18:49.024992+00:00", "step": "explain", "item": 0, "message": "Explanation completed", "job_id": "66ecb931753b"}
+{"timestamp": "2026-02-23T12:18:49.025988+00:00", "step": "flow", "item": 0, "message": "Completed item flow", "job_id": "66ecb931753b"}
+{"timestamp": "2026-02-23T12:18:49.025988+00:00", "step": "flow", "item": null, "message": "Batch flow completed", "job_id": "66ecb931753b"}
+{"timestamp": "2026-02-23T12:23:22.943072+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow", "job_id": "sync-bddc2dc1813c"}
+{"timestamp": "2026-02-23T12:23:22.945094+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST001_LOW_RISK", "job_id": "sync-bddc2dc1813c"}
+{"timestamp": "2026-02-23T12:23:22.946597+00:00", "step": "validate", "item": 0, "message": "Validation successful", "job_id": "sync-bddc2dc1813c"}
+{"timestamp": "2026-02-23T12:23:22.947813+00:00", "step": "score", "item": 0, "message": "Computing score", "job_id": "sync-bddc2dc1813c"}
+{"timestamp": "2026-02-23T12:23:22.999918+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0000", "job_id": "sync-bddc2dc1813c"}
+{"timestamp": "2026-02-23T12:23:23.000916+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk", "job_id": "sync-bddc2dc1813c"}
+{"timestamp": "2026-02-23T12:23:23.000916+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds", "job_id": "sync-bddc2dc1813c"}
+{"timestamp": "2026-02-23T12:23:23.001913+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT", "job_id": "sync-bddc2dc1813c"}
+{"timestamp": "2026-02-23T12:23:23.001913+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation", "job_id": "sync-bddc2dc1813c"}
+{"timestamp": "2026-02-23T12:23:23.001913+00:00", "step": "explain", "item": 0, "message": "Explanation completed", "job_id": "sync-bddc2dc1813c"}
+{"timestamp": "2026-02-23T12:23:23.002910+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow", "job_id": "sync-bddc2dc1813c"}
+{"timestamp": "2026-02-23T12:30:20.459075+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow", "job_id": "sync-d168cc9e0124"}
+{"timestamp": "2026-02-23T12:30:20.460553+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST001_LOW_RISK", "job_id": "sync-d168cc9e0124"}
+{"timestamp": "2026-02-23T12:30:20.460553+00:00", "step": "validate", "item": 0, "message": "Validation successful", "job_id": "sync-d168cc9e0124"}
+{"timestamp": "2026-02-23T12:30:20.461969+00:00", "step": "score", "item": 0, "message": "Computing score", "job_id": "sync-d168cc9e0124"}
+{"timestamp": "2026-02-23T12:30:20.500714+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0000", "job_id": "sync-d168cc9e0124"}
+{"timestamp": "2026-02-23T12:30:20.500714+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk", "job_id": "sync-d168cc9e0124"}
+{"timestamp": "2026-02-23T12:30:20.501774+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds", "job_id": "sync-d168cc9e0124"}
+{"timestamp": "2026-02-23T12:30:20.501774+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT", "job_id": "sync-d168cc9e0124"}
+{"timestamp": "2026-02-23T12:30:20.501774+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation", "job_id": "sync-d168cc9e0124"}
+{"timestamp": "2026-02-23T12:30:20.502780+00:00", "step": "explain", "item": 0, "message": "Explanation completed", "job_id": "sync-d168cc9e0124"}
+{"timestamp": "2026-02-23T12:30:20.502780+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow", "job_id": "sync-d168cc9e0124"}
+{"timestamp": "2026-02-23T12:30:36.498009+00:00", "step": "flow", "item": null, "message": "Batch flow started", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.500110+00:00", "step": "flow", "item": 0, "message": "Starting item flow", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.501363+00:00", "step": "validate", "item": 0, "message": "Starting validation for BATCH_001_ACCEPT", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.502360+00:00", "step": "validate", "item": 0, "message": "Validation successful", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.504895+00:00", "step": "score", "item": 0, "message": "Computing score", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.510477+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0000", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.511473+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.511473+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.512470+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.513300+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.513809+00:00", "step": "explain", "item": 0, "message": "Explanation completed", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.515086+00:00", "step": "flow", "item": 0, "message": "Completed item flow", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.517804+00:00", "step": "flow", "item": 1, "message": "Starting item flow", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.519802+00:00", "step": "validate", "item": 1, "message": "Starting validation for BATCH_002_CONDITIONAL", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.520798+00:00", "step": "validate", "item": 1, "message": "Validation successful", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.520798+00:00", "step": "score", "item": 1, "message": "Computing score", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.525799+00:00", "step": "score", "item": 1, "message": "Probability computed: 0.0003", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.526818+00:00", "step": "bucket", "item": 1, "message": "Risk bucket: No Risk", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.527814+00:00", "step": "decide", "item": 1, "message": "Applying decision thresholds", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.528815+00:00", "step": "decide", "item": 1, "message": "Decision: ACCEPT", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.529812+00:00", "step": "explain", "item": 1, "message": "Generating deterministic explanation", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.530809+00:00", "step": "explain", "item": 1, "message": "Explanation completed", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.530809+00:00", "step": "flow", "item": 1, "message": "Completed item flow", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.531805+00:00", "step": "flow", "item": 2, "message": "Starting item flow", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.532801+00:00", "step": "validate", "item": 2, "message": "Starting validation for BATCH_003_REVIEW", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.532801+00:00", "step": "validate", "item": 2, "message": "Validation successful", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.534303+00:00", "step": "score", "item": 2, "message": "Computing score", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.542882+00:00", "step": "score", "item": 2, "message": "Probability computed: 0.0542", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.543878+00:00", "step": "bucket", "item": 2, "message": "Risk bucket: No Risk", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.544383+00:00", "step": "decide", "item": 2, "message": "Applying decision thresholds", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.545139+00:00", "step": "decide", "item": 2, "message": "Decision: ACCEPT", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.546147+00:00", "step": "explain", "item": 2, "message": "Generating deterministic explanation", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.547166+00:00", "step": "explain", "item": 2, "message": "Explanation completed", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.547166+00:00", "step": "flow", "item": 2, "message": "Completed item flow", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.548288+00:00", "step": "flow", "item": 3, "message": "Starting item flow", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.548288+00:00", "step": "validate", "item": 3, "message": "Starting validation for BATCH_004_REJECT", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.549685+00:00", "step": "validate", "item": 3, "message": "Validation successful", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.551021+00:00", "step": "score", "item": 3, "message": "Computing score", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.555468+00:00", "step": "score", "item": 3, "message": "Probability computed: 0.9953", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.555974+00:00", "step": "bucket", "item": 3, "message": "Risk bucket: Very High", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.556999+00:00", "step": "decide", "item": 3, "message": "Applying decision thresholds", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.557996+00:00", "step": "decide", "item": 3, "message": "Decision: REJECT", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.557996+00:00", "step": "explain", "item": 3, "message": "Generating deterministic explanation", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.559355+00:00", "step": "explain", "item": 3, "message": "Explanation completed", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.560357+00:00", "step": "flow", "item": 3, "message": "Completed item flow", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.561354+00:00", "step": "flow", "item": 4, "message": "Starting item flow", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.561354+00:00", "step": "validate", "item": 4, "message": "Starting validation for BATCH_005_EXCELLENT", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.562600+00:00", "step": "validate", "item": 4, "message": "Validation successful", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.563605+00:00", "step": "score", "item": 4, "message": "Computing score", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.567914+00:00", "step": "score", "item": 4, "message": "Probability computed: 0.0000", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.568919+00:00", "step": "bucket", "item": 4, "message": "Risk bucket: No Risk", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.569917+00:00", "step": "decide", "item": 4, "message": "Applying decision thresholds", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.569917+00:00", "step": "decide", "item": 4, "message": "Decision: ACCEPT", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.571225+00:00", "step": "explain", "item": 4, "message": "Generating deterministic explanation", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.571225+00:00", "step": "explain", "item": 4, "message": "Explanation completed", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.572508+00:00", "step": "flow", "item": 4, "message": "Completed item flow", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-23T12:30:36.586971+00:00", "step": "flow", "item": null, "message": "Batch flow completed", "job_id": "1ea855eecd99"}
+{"timestamp": "2026-02-24T08:11:50.087640+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow"}
+{"timestamp": "2026-02-24T08:11:50.088654+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST001_LOW_RISK"}
+{"timestamp": "2026-02-24T08:11:50.089803+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:11:50.090854+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:11:50.118873+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0000"}
+{"timestamp": "2026-02-24T08:11:50.118873+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:11:50.119875+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:11:50.119875+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:11:50.119875+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:11:50.119875+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:11:50.119875+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow"}
+{"timestamp": "2026-02-24T08:11:50.124953+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow"}
+{"timestamp": "2026-02-24T08:11:50.126602+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST002_MODERATE_LOW"}
+{"timestamp": "2026-02-24T08:11:50.126602+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:11:50.126602+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:11:50.129758+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0000"}
+{"timestamp": "2026-02-24T08:11:50.129758+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:11:50.130755+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:11:50.130755+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:11:50.130755+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:11:50.131752+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:11:50.131752+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow"}
+{"timestamp": "2026-02-24T08:11:50.136976+00:00", "step": "flow", "item": null, "message": "Batch flow started"}
+{"timestamp": "2026-02-24T08:11:50.136976+00:00", "step": "flow", "item": 0, "message": "Starting item flow"}
+{"timestamp": "2026-02-24T08:11:50.137987+00:00", "step": "validate", "item": 0, "message": "Starting validation for BATCH_001_ACCEPT"}
+{"timestamp": "2026-02-24T08:11:50.137987+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:11:50.139107+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:11:50.142110+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0000"}
+{"timestamp": "2026-02-24T08:11:50.142612+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:11:50.142612+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:11:50.142612+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:11:50.143709+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:11:50.143709+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:11:50.143709+00:00", "step": "flow", "item": 0, "message": "Completed item flow"}
+{"timestamp": "2026-02-24T08:11:50.143709+00:00", "step": "flow", "item": 1, "message": "Starting item flow"}
+{"timestamp": "2026-02-24T08:11:50.143709+00:00", "step": "validate", "item": 1, "message": "Starting validation for BATCH_002_CONDITIONAL"}
+{"timestamp": "2026-02-24T08:11:50.145214+00:00", "step": "validate", "item": 1, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:11:50.145214+00:00", "step": "score", "item": 1, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:11:50.146229+00:00", "step": "score", "item": 1, "message": "Probability computed: 0.0003"}
+{"timestamp": "2026-02-24T08:11:50.147713+00:00", "step": "bucket", "item": 1, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:11:50.147713+00:00", "step": "decide", "item": 1, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:11:50.148761+00:00", "step": "decide", "item": 1, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:11:50.148761+00:00", "step": "explain", "item": 1, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:11:50.148761+00:00", "step": "explain", "item": 1, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:11:50.150059+00:00", "step": "flow", "item": 1, "message": "Completed item flow"}
+{"timestamp": "2026-02-24T08:11:50.150059+00:00", "step": "flow", "item": 2, "message": "Starting item flow"}
+{"timestamp": "2026-02-24T08:11:50.150059+00:00", "step": "validate", "item": 2, "message": "Starting validation for BATCH_003_REVIEW"}
+{"timestamp": "2026-02-24T08:11:50.151062+00:00", "step": "validate", "item": 2, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:11:50.151062+00:00", "step": "score", "item": 2, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:11:50.154131+00:00", "step": "score", "item": 2, "message": "Probability computed: 0.0542"}
+{"timestamp": "2026-02-24T08:11:50.154131+00:00", "step": "bucket", "item": 2, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:11:50.155128+00:00", "step": "decide", "item": 2, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:11:50.155632+00:00", "step": "decide", "item": 2, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:11:50.155632+00:00", "step": "explain", "item": 2, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:11:50.155632+00:00", "step": "explain", "item": 2, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:11:50.157113+00:00", "step": "flow", "item": 2, "message": "Completed item flow"}
+{"timestamp": "2026-02-24T08:11:50.157113+00:00", "step": "flow", "item": 3, "message": "Starting item flow"}
+{"timestamp": "2026-02-24T08:11:50.157113+00:00", "step": "validate", "item": 3, "message": "Starting validation for BATCH_004_REJECT"}
+{"timestamp": "2026-02-24T08:11:50.157113+00:00", "step": "validate", "item": 3, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:11:50.158370+00:00", "step": "score", "item": 3, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:11:50.160535+00:00", "step": "score", "item": 3, "message": "Probability computed: 0.9953"}
+{"timestamp": "2026-02-24T08:11:50.160535+00:00", "step": "bucket", "item": 3, "message": "Risk bucket: Very High"}
+{"timestamp": "2026-02-24T08:11:50.160535+00:00", "step": "decide", "item": 3, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:11:50.162038+00:00", "step": "decide", "item": 3, "message": "Decision: REJECT"}
+{"timestamp": "2026-02-24T08:11:50.162038+00:00", "step": "explain", "item": 3, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:11:50.162038+00:00", "step": "explain", "item": 3, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:11:50.163253+00:00", "step": "flow", "item": 3, "message": "Completed item flow"}
+{"timestamp": "2026-02-24T08:11:50.163253+00:00", "step": "flow", "item": 4, "message": "Starting item flow"}
+{"timestamp": "2026-02-24T08:11:50.163253+00:00", "step": "validate", "item": 4, "message": "Starting validation for BATCH_005_EXCELLENT"}
+{"timestamp": "2026-02-24T08:11:50.163253+00:00", "step": "validate", "item": 4, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:11:50.163253+00:00", "step": "score", "item": 4, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:11:50.165800+00:00", "step": "score", "item": 4, "message": "Probability computed: 0.0000"}
+{"timestamp": "2026-02-24T08:11:50.166809+00:00", "step": "bucket", "item": 4, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:11:50.166809+00:00", "step": "decide", "item": 4, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:11:50.166809+00:00", "step": "decide", "item": 4, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:11:50.166809+00:00", "step": "explain", "item": 4, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:11:50.168097+00:00", "step": "explain", "item": 4, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:11:50.168601+00:00", "step": "flow", "item": 4, "message": "Completed item flow"}
+{"timestamp": "2026-02-24T08:11:50.168601+00:00", "step": "flow", "item": null, "message": "Batch flow completed"}
+{"timestamp": "2026-02-24T08:11:50.173492+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow"}
+{"timestamp": "2026-02-24T08:11:50.174995+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST003_CONDITIONAL"}
+{"timestamp": "2026-02-24T08:11:50.176256+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:11:50.177284+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:11:50.179518+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0002"}
+{"timestamp": "2026-02-24T08:11:50.180598+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:11:50.180598+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:11:50.180598+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:11:50.180598+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:11:50.182102+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:11:50.182102+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow"}
+{"timestamp": "2026-02-24T08:11:50.186978+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow"}
+{"timestamp": "2026-02-24T08:11:50.188283+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST004_CONDITIONAL_HIGH"}
+{"timestamp": "2026-02-24T08:11:50.188283+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:11:50.188283+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:11:50.194148+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0011"}
+{"timestamp": "2026-02-24T08:11:50.194148+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:11:50.195152+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:11:50.195152+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:11:50.196296+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:11:50.196296+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:11:50.197355+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow"}
+{"timestamp": "2026-02-24T08:11:50.200490+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow"}
+{"timestamp": "2026-02-24T08:11:50.201996+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST010_HIGH_UTIL"}
+{"timestamp": "2026-02-24T08:11:50.201996+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:11:50.203017+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:11:50.205014+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0000"}
+{"timestamp": "2026-02-24T08:11:50.205516+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:11:50.206809+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:11:50.206809+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:11:50.207821+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:11:50.207821+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:11:50.208939+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow"}
+{"timestamp": "2026-02-24T08:11:50.212476+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow"}
+{"timestamp": "2026-02-24T08:11:50.213765+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST011_MANY_BANKS"}
+{"timestamp": "2026-02-24T08:11:50.213765+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:11:50.213765+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:11:50.215781+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0000"}
+{"timestamp": "2026-02-24T08:11:50.216995+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:11:50.216995+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:11:50.216995+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:11:50.216995+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:11:50.218178+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:11:50.218178+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow"}
+{"timestamp": "2026-02-24T08:11:50.223297+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow"}
+{"timestamp": "2026-02-24T08:11:50.223297+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST009_EXCELLENT"}
+{"timestamp": "2026-02-24T08:11:50.223297+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:11:50.224800+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:11:50.225819+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0000"}
+{"timestamp": "2026-02-24T08:11:50.226814+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:11:50.226814+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:11:50.227814+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:11:50.227814+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:11:50.227814+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:11:50.228811+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow"}
+{"timestamp": "2026-02-24T08:11:50.232527+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow"}
+{"timestamp": "2026-02-24T08:11:50.233529+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST007_REJECT_HIGH"}
+{"timestamp": "2026-02-24T08:11:50.233529+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:11:50.233529+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:11:50.236069+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.7845"}
+{"timestamp": "2026-02-24T08:11:50.237067+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: Moderate"}
+{"timestamp": "2026-02-24T08:11:50.237067+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:11:50.237067+00:00", "step": "decide", "item": 0, "message": "Decision: REVIEW"}
+{"timestamp": "2026-02-24T08:11:50.238487+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:11:50.238487+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:11:50.238487+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow"}
+{"timestamp": "2026-02-24T08:11:50.243795+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow"}
+{"timestamp": "2026-02-24T08:11:50.243795+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST008_REJECT_CRITICAL"}
+{"timestamp": "2026-02-24T08:11:50.244778+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:11:50.245302+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:11:50.246440+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.9998"}
+{"timestamp": "2026-02-24T08:11:50.247443+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: Very High"}
+{"timestamp": "2026-02-24T08:11:50.247443+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:11:50.247443+00:00", "step": "decide", "item": 0, "message": "Decision: REJECT"}
+{"timestamp": "2026-02-24T08:11:50.248624+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:11:50.248624+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:11:50.248624+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow"}
+{"timestamp": "2026-02-24T08:11:50.253433+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow"}
+{"timestamp": "2026-02-24T08:11:50.253433+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST005_REVIEW_REQUIRED"}
+{"timestamp": "2026-02-24T08:11:50.253433+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:11:50.254937+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:11:50.257153+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0189"}
+{"timestamp": "2026-02-24T08:11:50.257153+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:11:50.258149+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:11:50.258149+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:11:50.258149+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:11:50.259258+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:11:50.259258+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow"}
+{"timestamp": "2026-02-24T08:11:50.263825+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow"}
+{"timestamp": "2026-02-24T08:11:50.263825+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST006_REVIEW_HIGH"}
+{"timestamp": "2026-02-24T08:11:50.264821+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:11:50.264821+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:11:50.267561+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.1430"}
+{"timestamp": "2026-02-24T08:11:50.267561+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:11:50.267561+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:11:50.267561+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:11:50.268989+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:11:50.268989+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:11:50.268989+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow"}
+{"timestamp": "2026-02-24T08:41:13.628833+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow"}
+{"timestamp": "2026-02-24T08:41:13.629853+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST001_LOW_RISK"}
+{"timestamp": "2026-02-24T08:41:13.631356+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:41:13.632478+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:41:13.664814+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0000"}
+{"timestamp": "2026-02-24T08:41:13.666235+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:41:13.666738+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:41:13.666738+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:41:13.668091+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:41:13.668091+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:41:13.668091+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow"}
+{"timestamp": "2026-02-24T08:41:13.675120+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow"}
+{"timestamp": "2026-02-24T08:41:13.676117+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST002_MODERATE_LOW"}
+{"timestamp": "2026-02-24T08:41:13.676117+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:41:13.677114+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:41:13.679107+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0000"}
+{"timestamp": "2026-02-24T08:41:13.680104+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:41:13.680104+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:41:13.681105+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:41:13.681105+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:41:13.681105+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:41:13.682327+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow"}
+{"timestamp": "2026-02-24T08:41:13.689021+00:00", "step": "flow", "item": null, "message": "Batch flow started"}
+{"timestamp": "2026-02-24T08:41:13.690320+00:00", "step": "flow", "item": 0, "message": "Starting item flow"}
+{"timestamp": "2026-02-24T08:41:13.690320+00:00", "step": "validate", "item": 0, "message": "Starting validation for BATCH_001_ACCEPT"}
+{"timestamp": "2026-02-24T08:41:13.691323+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:41:13.691323+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:41:13.694511+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0000"}
+{"timestamp": "2026-02-24T08:41:13.694511+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:41:13.694511+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:41:13.695507+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:41:13.695507+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:41:13.695507+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:41:13.696504+00:00", "step": "flow", "item": 0, "message": "Completed item flow"}
+{"timestamp": "2026-02-24T08:41:13.696504+00:00", "step": "flow", "item": 1, "message": "Starting item flow"}
+{"timestamp": "2026-02-24T08:41:13.696504+00:00", "step": "validate", "item": 1, "message": "Starting validation for BATCH_002_CONDITIONAL"}
+{"timestamp": "2026-02-24T08:41:13.697501+00:00", "step": "validate", "item": 1, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:41:13.697501+00:00", "step": "score", "item": 1, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:41:13.700583+00:00", "step": "score", "item": 1, "message": "Probability computed: 0.0003"}
+{"timestamp": "2026-02-24T08:41:13.701085+00:00", "step": "bucket", "item": 1, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:41:13.701085+00:00", "step": "decide", "item": 1, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:41:13.702229+00:00", "step": "decide", "item": 1, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:41:13.702229+00:00", "step": "explain", "item": 1, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:41:13.702229+00:00", "step": "explain", "item": 1, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:41:13.703234+00:00", "step": "flow", "item": 1, "message": "Completed item flow"}
+{"timestamp": "2026-02-24T08:41:13.703234+00:00", "step": "flow", "item": 2, "message": "Starting item flow"}
+{"timestamp": "2026-02-24T08:41:13.703234+00:00", "step": "validate", "item": 2, "message": "Starting validation for BATCH_003_REVIEW"}
+{"timestamp": "2026-02-24T08:41:13.703234+00:00", "step": "validate", "item": 2, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:41:13.704422+00:00", "step": "score", "item": 2, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:41:13.705421+00:00", "step": "score", "item": 2, "message": "Probability computed: 0.0542"}
+{"timestamp": "2026-02-24T08:41:13.706485+00:00", "step": "bucket", "item": 2, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:41:13.707485+00:00", "step": "decide", "item": 2, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:41:13.707485+00:00", "step": "decide", "item": 2, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:41:13.707485+00:00", "step": "explain", "item": 2, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:41:13.708599+00:00", "step": "explain", "item": 2, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:41:13.708599+00:00", "step": "flow", "item": 2, "message": "Completed item flow"}
+{"timestamp": "2026-02-24T08:41:13.708599+00:00", "step": "flow", "item": 3, "message": "Starting item flow"}
+{"timestamp": "2026-02-24T08:41:13.709602+00:00", "step": "validate", "item": 3, "message": "Starting validation for BATCH_004_REJECT"}
+{"timestamp": "2026-02-24T08:41:13.709602+00:00", "step": "validate", "item": 3, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:41:13.709602+00:00", "step": "score", "item": 3, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:41:13.712403+00:00", "step": "score", "item": 3, "message": "Probability computed: 0.9953"}
+{"timestamp": "2026-02-24T08:41:13.712403+00:00", "step": "bucket", "item": 3, "message": "Risk bucket: Very High"}
+{"timestamp": "2026-02-24T08:41:13.713401+00:00", "step": "decide", "item": 3, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:41:13.713401+00:00", "step": "decide", "item": 3, "message": "Decision: REJECT"}
+{"timestamp": "2026-02-24T08:41:13.713401+00:00", "step": "explain", "item": 3, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:41:13.713401+00:00", "step": "explain", "item": 3, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:41:13.714506+00:00", "step": "flow", "item": 3, "message": "Completed item flow"}
+{"timestamp": "2026-02-24T08:41:13.715516+00:00", "step": "flow", "item": 4, "message": "Starting item flow"}
+{"timestamp": "2026-02-24T08:41:13.716540+00:00", "step": "validate", "item": 4, "message": "Starting validation for BATCH_005_EXCELLENT"}
+{"timestamp": "2026-02-24T08:41:13.716540+00:00", "step": "validate", "item": 4, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:41:13.717979+00:00", "step": "score", "item": 4, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:41:13.720028+00:00", "step": "score", "item": 4, "message": "Probability computed: 0.0000"}
+{"timestamp": "2026-02-24T08:41:13.720028+00:00", "step": "bucket", "item": 4, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:41:13.721024+00:00", "step": "decide", "item": 4, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:41:13.721613+00:00", "step": "decide", "item": 4, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:41:13.721613+00:00", "step": "explain", "item": 4, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:41:13.721613+00:00", "step": "explain", "item": 4, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:41:13.722622+00:00", "step": "flow", "item": 4, "message": "Completed item flow"}
+{"timestamp": "2026-02-24T08:41:13.722622+00:00", "step": "flow", "item": null, "message": "Batch flow completed"}
+{"timestamp": "2026-02-24T08:41:13.729235+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow"}
+{"timestamp": "2026-02-24T08:41:13.729235+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST003_CONDITIONAL"}
+{"timestamp": "2026-02-24T08:41:13.729235+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:41:13.730247+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:41:13.733259+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0002"}
+{"timestamp": "2026-02-24T08:41:13.733259+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:41:13.733259+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:41:13.734681+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:41:13.734681+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:41:13.734681+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:41:13.734681+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow"}
+{"timestamp": "2026-02-24T08:41:13.739872+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow"}
+{"timestamp": "2026-02-24T08:41:13.739872+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST004_CONDITIONAL_HIGH"}
+{"timestamp": "2026-02-24T08:41:13.739872+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:41:13.739872+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:41:13.742402+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0011"}
+{"timestamp": "2026-02-24T08:41:13.742402+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:41:13.743480+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:41:13.743480+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:41:13.743480+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:41:13.743480+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:41:13.744634+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow"}
+{"timestamp": "2026-02-24T08:41:13.748706+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow"}
+{"timestamp": "2026-02-24T08:41:13.748706+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST010_HIGH_UTIL"}
+{"timestamp": "2026-02-24T08:41:13.749920+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:41:13.749920+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:41:13.752436+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0000"}
+{"timestamp": "2026-02-24T08:41:13.752436+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:41:13.753434+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:41:13.753434+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:41:13.753434+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:41:13.754522+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:41:13.754522+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow"}
+{"timestamp": "2026-02-24T08:41:13.758754+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow"}
+{"timestamp": "2026-02-24T08:41:13.759774+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST011_MANY_BANKS"}
+{"timestamp": "2026-02-24T08:41:13.759774+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:41:13.759774+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:41:13.763767+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0000"}
+{"timestamp": "2026-02-24T08:41:13.763767+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:41:13.764764+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:41:13.764764+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:41:13.765807+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:41:13.765807+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:41:13.765807+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow"}
+{"timestamp": "2026-02-24T08:41:13.770336+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow"}
+{"timestamp": "2026-02-24T08:41:13.771332+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST009_EXCELLENT"}
+{"timestamp": "2026-02-24T08:41:13.771836+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:41:13.771836+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:41:13.774194+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0000"}
+{"timestamp": "2026-02-24T08:41:13.775198+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:41:13.775198+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:41:13.776195+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:41:13.776195+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:41:13.776195+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:41:13.776195+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow"}
+{"timestamp": "2026-02-24T08:41:13.782258+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow"}
+{"timestamp": "2026-02-24T08:41:13.782258+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST007_REJECT_HIGH"}
+{"timestamp": "2026-02-24T08:41:13.783720+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:41:13.783720+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:41:13.786245+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.7845"}
+{"timestamp": "2026-02-24T08:41:13.786245+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: Moderate"}
+{"timestamp": "2026-02-24T08:41:13.787242+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:41:13.787242+00:00", "step": "decide", "item": 0, "message": "Decision: REVIEW"}
+{"timestamp": "2026-02-24T08:41:13.787242+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:41:13.787242+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:41:13.788630+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow"}
+{"timestamp": "2026-02-24T08:41:13.792137+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow"}
+{"timestamp": "2026-02-24T08:41:13.793198+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST008_REJECT_CRITICAL"}
+{"timestamp": "2026-02-24T08:41:13.794376+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:41:13.794376+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:41:13.796394+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.9998"}
+{"timestamp": "2026-02-24T08:41:13.797389+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: Very High"}
+{"timestamp": "2026-02-24T08:41:13.797389+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:41:13.797389+00:00", "step": "decide", "item": 0, "message": "Decision: REJECT"}
+{"timestamp": "2026-02-24T08:41:13.798554+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:41:13.798554+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:41:13.799652+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow"}
+{"timestamp": "2026-02-24T08:41:13.805040+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow"}
+{"timestamp": "2026-02-24T08:41:13.806068+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST005_REVIEW_REQUIRED"}
+{"timestamp": "2026-02-24T08:41:13.806068+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:41:13.807312+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:41:13.809853+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.0189"}
+{"timestamp": "2026-02-24T08:41:13.811355+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:41:13.811355+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:41:13.811355+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:41:13.812500+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:41:13.812500+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:41:13.812500+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow"}
+{"timestamp": "2026-02-24T08:41:13.817925+00:00", "step": "flow", "item": 0, "message": "Starting single-item flow"}
+{"timestamp": "2026-02-24T08:41:13.818921+00:00", "step": "validate", "item": 0, "message": "Starting validation for CUST006_REVIEW_HIGH"}
+{"timestamp": "2026-02-24T08:41:13.818921+00:00", "step": "validate", "item": 0, "message": "Validation successful"}
+{"timestamp": "2026-02-24T08:41:13.820138+00:00", "step": "score", "item": 0, "message": "Computing score"}
+{"timestamp": "2026-02-24T08:41:13.822162+00:00", "step": "score", "item": 0, "message": "Probability computed: 0.1430"}
+{"timestamp": "2026-02-24T08:41:13.823157+00:00", "step": "bucket", "item": 0, "message": "Risk bucket: No Risk"}
+{"timestamp": "2026-02-24T08:41:13.823157+00:00", "step": "decide", "item": 0, "message": "Applying decision thresholds"}
+{"timestamp": "2026-02-24T08:41:13.823157+00:00", "step": "decide", "item": 0, "message": "Decision: ACCEPT"}
+{"timestamp": "2026-02-24T08:41:13.823157+00:00", "step": "explain", "item": 0, "message": "Generating deterministic explanation"}
+{"timestamp": "2026-02-24T08:41:13.824194+00:00", "step": "explain", "item": 0, "message": "Explanation completed"}
+{"timestamp": "2026-02-24T08:41:13.825192+00:00", "step": "flow", "item": 0, "message": "Completed single-item flow"}
