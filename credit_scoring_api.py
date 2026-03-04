@@ -204,7 +204,8 @@ def health():
     })
 
 
-@app.route("/screen", methods=["POST"])
+@app.route("/screen", methods=["POST"], strict_slashes=False)
+@app.route("/score", methods=["POST"], strict_slashes=False)
 def screen():
     """
     Screen a single customer application.

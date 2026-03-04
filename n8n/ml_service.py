@@ -12,8 +12,13 @@ from catboost import Pool
 app = Flask(__name__)
 
 # Model path
-MODEL_PATH = "../credit_risk_model.pkl"
+MODEL_PATH = r"C:\TMU\credit_risk_model.pkl"
 MODEL = None
+
+# Optional simple auth (recommended when exposing via tunnel)
+# If ML_API_KEY is set, callers must send header: X-ML-API-Key: <value>
+ML_API_KEY = os.getenv("ML_API_KEY")
+ML_API_KEY_HEADER = "X-ML-API-Key"
 
 # Features expected by the model
 FEATURES = [
@@ -43,8 +48,21 @@ def health():
     return jsonify({
         "status": "healthy",
         "model_loaded": MODEL is not None,
-        "service": "ML Prediction Service for n8n"
+        "service": "ML Prediction Service for n8n",
+        "auth_enabled": bool(ML_API_KEY)
     }), 200
+
+
+def _require_api_key_if_configured():
+    if not ML_API_KEY:
+        return None
+    provided = request.headers.get(ML_API_KEY_HEADER)
+    if not provided or provided != ML_API_KEY:
+        return jsonify({
+            "error": "Unauthorized",
+            "details": f"Missing or invalid {ML_API_KEY_HEADER}"
+        }), 401
+    return None
 
 
 @app.route('/predict', methods=['POST'])
@@ -73,6 +91,10 @@ def predict():
         return jsonify({
             "error": "Model not loaded. Check server startup logs."
         }), 503
+
+    auth_error = _require_api_key_if_configured()
+    if auth_error is not None:
+        return auth_error
     
     try:
         data = request.get_json()
@@ -149,6 +171,10 @@ def predict_batch():
         return jsonify({
             "error": "Model not loaded"
         }), 503
+
+    auth_error = _require_api_key_if_configured()
+    if auth_error is not None:
+        return auth_error
     
     try:
         data = request.get_json()

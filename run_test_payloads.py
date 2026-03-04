@@ -74,7 +74,7 @@ def http_json(method: str, url: str, body: Any | None) -> Tuple[int, Dict[str, A
 
 
 def run_local_single(payload: Dict[str, Any]) -> RunResult:
-    from credit_scoring_agent import add_audit_event, load_model, now_iso, run_agentic_item
+    from credit_scoring_agent_v2 import add_audit_event, load_model, now_iso, run_agentic_item
 
     load_model()
 
@@ -102,7 +102,7 @@ def run_local_single(payload: Dict[str, Any]) -> RunResult:
 
 
 def run_local_batch(payload: Any) -> RunResult:
-    from credit_scoring_agent import add_audit_event, load_model, now_iso, parse_batch_payload, run_agentic_item, summarize_results
+    from credit_scoring_agent_v2 import add_audit_event, load_model, now_iso, parse_batch_payload, run_agentic_item, summarize_results
 
     load_model()
 
